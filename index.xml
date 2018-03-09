@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>epsilon on epsilon</title>
+    <title>Jayanth on Jayanth</title>
     <link>https://jayanthrr.github.io/</link>
-    <description>Recent content in epsilon on epsilon</description>
+    <description>Recent content in Jayanth on Jayanth</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
@@ -11,36 +11,182 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Fake News Challenge- stage 1</title>
+      <link>https://jayanthrr.github.io/project/fnc/</link>
+      <pubDate>Thu, 08 Mar 2018 22:32:58 -0500</pubDate>
+      
+      <guid>https://jayanthrr.github.io/project/fnc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Connected and Autonomous Traffic Simulator</title>
+      <link>https://jayanthrr.github.io/project/cats/</link>
+      <pubDate>Thu, 08 Mar 2018 22:29:56 -0500</pubDate>
+      
+      <guid>https://jayanthrr.github.io/project/cats/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Rollout</title>
       <link>https://jayanthrr.github.io/post/rollout/</link>
       <pubDate>Tue, 27 Feb 2018 14:29:56 -0500</pubDate>
       
       <guid>https://jayanthrr.github.io/post/rollout/</guid>
-      <description></description>
+      <description>
+
+&lt;p&gt;&lt;em&gt;Life can only be understood going backwards, but it must be lived going forwards - Kierkegaard&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Dynamic Programming is a mathematical technique that is used in several fields of research including economics, finance, engineering. It deals with making decisions over different stages of the problem in order to minimize (or maximize) a corresponding cost function (or reward). The outcome of a decision at a given stage can be fully predicted (deterministic) or can only be partially predicted (with randomness involved). One key aspect of such problems is the trade off in optimizing the cost incurred at the current stage and the cost to be incurred at a future stage.&lt;/p&gt;
+
+&lt;p&gt;Dynamic Programming is very helpful in many contexts by providing an exact solution, however, when the problem size increases, it requires enormous amount of storage and computational time (often referred to as the &lt;em&gt;curse of dimensionality&lt;/em&gt;) which makes it infeasible to apply to practical situations. Often in such situations, one may not desire an exact solution, but an approximately optimal (or suboptimal) solution. Then there must be a better class of techniques that can capture this trade off between feasibility and sub optimality. These techniques are collectively referred to as &lt;em&gt;Approximate Dynamic Programming&lt;/em&gt; or &lt;em&gt;Reinforcement Learning&lt;/em&gt; (in the field of AI) or &lt;em&gt;Neuro Dynamic Programming&lt;/em&gt; (in the field of automatic control), all of which essentially mean the same.&lt;/p&gt;
+
+&lt;p&gt;In this blog post, we shall look at a specific technique called &lt;em&gt;Rollout Algorithm&lt;/em&gt; that is quite extensively used (with surprisingly good results). In fact, &lt;a href=&#34;https://www.nature.com/articles/nature16961&#34; target=&#34;_blank&#34;&gt;Mastering the game of Go, DeepMind&lt;/a&gt; uses a variant of &lt;em&gt;Rollout&lt;/em&gt; called &lt;em&gt;Monte Carlo Tree Search&lt;/em&gt;. We shall first formulate a DP problem, state the DP algorithm and illustrate with an example the infeasibility of DP. Using the same example, we shall study how &lt;em&gt;Rollout&lt;/em&gt; offers an effective solution that optimizes the trade-off between accuracy and computation. This post is entirely based on my reading of the book &lt;a href=&#34;http://web.mit.edu/dimitrib/www/dpchapter.html&#34; target=&#34;_blank&#34;&gt;Approximate Dynamic Programming&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://jayanthrr.github.io/img/DP1.png&#34; alt=&#34;DP&#34; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;dp-formulation&#34;&gt;DP formulation&lt;/h1&gt;
+
+&lt;p&gt;In this post, we shall focus only on finite horizon problems (problems involving a finite number of stages or time steps at which a decision is taken). We denote the state of the system at time $k$ as $x&lt;em&gt;{k}$ (belongs to a space $S&lt;/em&gt;{k}$), and the decision (or control) taken as $u&lt;em&gt;{k}$ (belongs to a space $U&lt;/em&gt;{k}(x&lt;em&gt;{k})$), and a random variable $w&lt;/em&gt;{k}$ (which is independent of other $w_{i}$) that affects the system. The system has the form&lt;/p&gt;
+
+&lt;p&gt;$$x&lt;em&gt;{k+1} = f&lt;/em&gt;{k}(x&lt;em&gt;{k}, u&lt;/em&gt;{k}, w_{k}) $$&lt;/p&gt;
+
+&lt;p&gt;where $k$ takes a value between $0$ and $N$ (finite horizon). At each stage, there is a cost incurred $g&lt;em&gt;{k}(x&lt;/em&gt;{k}, u&lt;em&gt;{k}, w&lt;/em&gt;{k})$ which accumulates over time. The total cost incurred is then&lt;/p&gt;
+
+&lt;p&gt;$$ g&lt;em&gt;{N}(x&lt;/em&gt;{N}) + \sum&lt;em&gt;{k=0}^{N-1}g&lt;/em&gt;{k}(x&lt;em&gt;{k}, u&lt;/em&gt;{k}, w_{k})$$&lt;/p&gt;
+
+&lt;p&gt;where $g&lt;em&gt;{N}(x&lt;/em&gt;{N})$ is a terminal cost incurred at the final stage (it only depends on the state, and no action is to be taken). The objective of the problem is to find an optimal policy&lt;/p&gt;
+
+&lt;p&gt;$$\pi:= {\mu&lt;em&gt;{0},..,\mu&lt;/em&gt;{k},.. \mu_{N-1}}$$&lt;/p&gt;
+
+&lt;p&gt;(where $\mu&lt;em&gt;{k} = u&lt;/em&gt;{k}(x&lt;em&gt;{k})$) that minimizes the expected cost (we take an expectation due to the random variable $w&lt;/em&gt;{k}$). Given an initial state $x&lt;em&gt;{0}$, the expected cost of following a policy $\pi$ starting from $x&lt;/em&gt;{0}$ is denoted as&lt;/p&gt;
+
+&lt;p&gt;$$ J&lt;em&gt;{\pi}(x&lt;/em&gt;{0}) = \mathbb{E}\big[g&lt;em&gt;{N}(x&lt;/em&gt;{N}) + \sum&lt;em&gt;{k=0}^{N-1}g&lt;/em&gt;{k}(x&lt;em&gt;{k}, u&lt;/em&gt;{k}, w_{k})]$$&lt;/p&gt;
+
+&lt;p&gt;An optimal policy $\pi^{*}$ is the one that minimizes this expected cost; i.e,&lt;/p&gt;
+
+&lt;p&gt;$$ J&lt;em&gt;{\pi^{*}}(x&lt;/em&gt;{0}) = \min&lt;em&gt;{\pi \in \Pi} J&lt;/em&gt;{\pi}(x_{0})$$&lt;/p&gt;
+
+&lt;p&gt;where $\Pi$ is the space of admissible policies.&lt;/p&gt;
+
+&lt;h1 id=&#34;bellman-s-principle-of-optimality-and-the-dp-algorithm&#34;&gt;Bellman&amp;rsquo;s principle of optimality and the DP algorithm&lt;/h1&gt;
+
+&lt;p&gt;Let $\pi^{*}={\mu&lt;em&gt;{0}^{*},..,\mu&lt;/em&gt;{k}^{*},.. \mu&lt;em&gt;{N-1}^{*}}$ be an optimal policy of the problem stated above, and assume that when using $\pi^{*}$, a given state $x&lt;/em&gt;{i}$ occurs at time $i$ with positive probability. Consider the subproblem, whereby we are at $x_{i}$ at time $i$ and wish to minimze the &amp;ldquo;cost-to-go&amp;rdquo; from time $i$ to time $N$&lt;/p&gt;
+
+&lt;p&gt;$$ \mathbb{E}\bigg[g&lt;em&gt;{N}(x&lt;/em&gt;{N}) + \sum&lt;em&gt;{k=i}^{N-1}g&lt;/em&gt;{k}(x&lt;em&gt;{k}, u&lt;/em&gt;{k}, w_{k})\bigg]$$&lt;/p&gt;
+
+&lt;p&gt;Then the truncated policy ${\mu&lt;em&gt;{i}^{*},\mu&lt;/em&gt;{i+1}^{*},.. \mu_{N-1}^{*}}$ is optimal for this subproblem.&lt;/p&gt;
+
+&lt;p&gt;Intuitively, let us look at the following problem where we start from A and we need to reach the destination E, and the edge weights are the costs incurred for traversing that edge. The path that minimizes the cost is A-B-D-E. Equivalently, the decision (corresponds to choosing the next node) taken at each time step are B at k=0, D at k=1 and E at k=2. If the policy determined by the path A-B-D-E is optimal, then the truncated path B-D-E is also optimal. If it were not, then we can further reduce the cost by choosing the optimal path which contradicts the fact that A-B-D-E is the path with the minimum cost.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../images/DP1.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;dp-algorithm&#34;&gt;DP Algorithm&lt;/h2&gt;
+
+&lt;p&gt;The DP algorithm proceeds as follows. We start from the last step of decision making ($N-1$) and proceed backwards performing the minimization&lt;/p&gt;
+
+&lt;p&gt;$$ J&lt;em&gt;{N}(x&lt;/em&gt;{N}) = g&lt;em&gt;{N}(x&lt;/em&gt;{N}) $$&lt;/p&gt;
+
+&lt;p&gt;$$ J&lt;em&gt;{k}(x&lt;/em&gt;{k}) = \min&lt;em&gt;{u&lt;/em&gt;{k}\in U&lt;em&gt;{k}(x&lt;/em&gt;{k})} \mathbb{E}&lt;em&gt;{w&lt;/em&gt;{k}}\bigg[g&lt;em&gt;{N}(x&lt;/em&gt;{N}) + \sum&lt;em&gt;{k=0}^{N-1}g&lt;/em&gt;{k}(x&lt;em&gt;{k}, u&lt;/em&gt;{k}, w_{k})\bigg], k = 0,1,..,N-1$$&lt;/p&gt;
+
+&lt;p&gt;where the expectation is taken with respect to the probability distribution of $w&lt;em&gt;{k}$ which is assumed to depend on $x&lt;/em&gt;{k}, u&lt;em&gt;{k}$. Furthermore, if
+$\mu^{*}&lt;/em&gt;{k}=u&lt;em&gt;{k}^{*}(x&lt;/em&gt;{k})$ minimizes the above equation, then the policy $\pi^{*}={\mu&lt;em&gt;{0}{*},&amp;hellip;,\mu&lt;/em&gt;{k}{*},&amp;hellip;,\mu_{N-1}{*}}$ is optimal.&lt;/p&gt;
+
+&lt;h1 id=&#34;example&#34;&gt;Example&lt;/h1&gt;
+
+&lt;h1 id=&#34;one-step-lookahead-multi-step-lookahead&#34;&gt;One-step lookahead, multi-step lookahead&lt;/h1&gt;
+
+&lt;h1 id=&#34;rollout&#34;&gt;Rollout&lt;/h1&gt;
+
+&lt;h1 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h1&gt;
+
+&lt;h2 id=&#34;references&#34;&gt;References&lt;/h2&gt;
+</description>
     </item>
     
     <item>
       <title>Mechanism Design and Sponsored Search Auctions</title>
-      <link>https://jayanthrr.github.io/post/_p1/</link>
+      <link>https://jayanthrr.github.io/post/sponsored/</link>
       <pubDate>Tue, 27 Feb 2018 12:40:58 -0500</pubDate>
       
-      <guid>https://jayanthrr.github.io/post/_p1/</guid>
+      <guid>https://jayanthrr.github.io/post/sponsored/</guid>
       <description>
 
 &lt;p&gt;If you are watching a video on You Tube and the video is paused for an annoying 30 sec advertisement, you probably should know the history behind on-line advertisements. In fact, advertising and internet helped each other attain their respective potentials. Without advertising, there wouldn&amp;rsquo;t be any Google or Facebook (may be not in the present form), and without any internet, you probably wouldn&amp;rsquo;t know about a tourist package in a remote island like Madeira.&lt;/p&gt;
 
-&lt;p&gt;In this blog post, let us have a look at a mechanism design called &lt;em&gt;Sponsored Search Auctions&lt;/em&gt;, which is key to the rise of internet giants like Yahoo! and Google. We shall discuss the properties of such auctions along with examples to gain a better insight. This post is intended for general audience, and hence we shall try hard to not drift into game theoretic concepts (although it is impossible to do so at all times).&lt;/p&gt;
+&lt;p&gt;In this blog post, let us have a look at a mechanism design called &lt;a href=&#34;https://en.wikipedia.org/wiki/Sponsored_search_auction&#34; target=&#34;_blank&#34;&gt;&lt;em&gt;Sponsored Search Auctions&lt;/em&gt;&lt;/a&gt;, which is key to the rise of internet giants like Yahoo! and Google. We shall discuss the properties of such auctions along with examples to gain a better insight. This post is intended for general audience, and hence we shall try hard to not drift into game theoretic concepts (although it is impossible to do so at all times).&lt;/p&gt;
 
 &lt;h1 id=&#34;sponsored-search-auctions&#34;&gt;Sponsored Search Auctions&lt;/h1&gt;
 
-&lt;p&gt;Before diving into the topic, let us get familiar with auctions. &lt;em&gt;Auction&lt;/em&gt; is the sale of items where the seller invites the buyers (bidders) to submit bids and makes a decision on whom to sell it to.  The bidders have their own valuations for the item and submit bids indicating their willingness to pay for it, and the seller allocates the item to the bidder he/she likes the most (usually it is the bidder with the highest bid).  For example, if you want to move to a new place but you do not want to carry some of your furniture/luggage, you put them on
+&lt;p&gt;Before diving into the topic, let us get familiar with auctions. &lt;a href=&#34;https://en.wikipedia.org/wiki/Auction&#34; target=&#34;_blank&#34;&gt;&lt;em&gt;Auction&lt;/em&gt;&lt;/a&gt; is the sale of items where the seller invites the buyers (bidders) to submit bids and makes a decision on whom to sell it to.  The bidders have their own valuations for the item and submit bids indicating their willingness to pay for it, and the seller allocates the item to the bidder he/she likes the most (usually it is the bidder with the highest bid).  For example, if you want to move to a new place but you do not want to carry some of your furniture/luggage, you put them on
 eBay for an auction. If someone fails to repay their loan to a bank, the bank
 auctions off the mortgaged property.&lt;/p&gt;
 
 &lt;p&gt;Consider that you are planning to travel to Madeira with your friends. A quick internet search for the work &amp;lsquo;Madeira tours&amp;rsquo; results in a list of links some of which
 are marked as &lt;em&gt;Ad&lt;/em&gt; sponsored by the respective websites. Whenever a user clicks
 a sponsored link through the search engine, the advertiser pays a certain amount
-to the search engine for facilitating their advertising. In &lt;em&gt;Sponsored Search Auctions&lt;/em&gt; for every keyword, the search engine allocates a certain number of slots, and multiple advertisers compete for these slots which provide different value to different advertisers. The probability of an advertiser $i$’s Ad being clicked when placed in a slot $j$ is called the Click Through Rate, or CTR, denoted by $α_{ij}$ (this is simplified in various mechanisms). The per click value to advertiser $i$ is $s_{i}$ and the expected value on being assigned a slot $j$ is $α_{ij}s_i$.  The search engine must design an efficient mechanism that maximizes the welfare (or the revenue) by assigning the slots to different advertisers (bidders). Let us follow the convention of using search engine for the seller and advertiser for the bidder.&lt;/p&gt;
+to the search engine for facilitating their advertising. In &lt;em&gt;Sponsored Search Auctions&lt;/em&gt; for every keyword, the search engine allocates a certain number of slots, and multiple advertisers compete for these slots which provide different value to different advertisers. The probability of an advertiser $i$’s Ad being clicked when placed in a slot $j$ is called the &lt;strong&gt;Click Through Rate&lt;/strong&gt;, or CTR, denoted by $α_{ij}$ (this is simplified in various mechanisms). The per click value to advertiser $i$ is $s_{i}$ and the expected value on being assigned a slot $j$ is $α_{ij}s_i$.  The search engine must design an efficient mechanism that maximizes the welfare (or the revenue) by assigning the slots to different advertisers (bidders). Let us follow the convention of using search engine for the seller and advertiser for the bidder.&lt;/p&gt;
+
+&lt;p&gt;Let us now look at some important properties of &lt;em&gt;Sponsored Search Auctions&lt;/em&gt; that differentiate it from traditional auctions.
+- These auctions are dynamic in nature and the bidders can change their bids from
+time to time. We may now not get the same list of links for searching &amp;lsquo;Madeira tours&amp;rsquo; if some bidders&amp;rsquo; algorithms modified their respective bids.
+- The items at sale are perishable with time. If an item is unsold, it is of no value to the search engine at a later point of time, unlike a storable product such as a piece of furniture which still has some value in the future if unsold. The search engine though is not constrained by the quantity of items it can offer. It can potentially fill up the entire search results with &lt;em&gt;Ads&lt;/em&gt;. However, we may not use &lt;em&gt;Google Search&lt;/em&gt; if every search query returns only &lt;em&gt;Ads&lt;/em&gt;.
+- The unit of what is being sold is different for the search engine and the advertiser. For the search engine, it is the space allotted to the advertiser every time a user searches for that particular key word. For the advertiser, it is the value of trade when a user clicks the sponsored link. In practice, the advertiser is charged based on the number of clicks (or the rate of it) the link receives.&lt;/p&gt;
+
+&lt;h1 id=&#34;history-and-generalized-first-price-auctions&#34;&gt;History and Generalized First Price Auctions&lt;/h1&gt;
+
+&lt;p&gt;In the early 1990s, when the era of internet advertising began, &lt;em&gt;Ads&lt;/em&gt; were sold on a per impression basis, which includes a flat fee paid by the advertiser to the search engine for showing their advertisement a fixed number of times. Internet advertising was then revolutionized by Overture in 1997 (later acquired by Yahoo!), with their design called as the &lt;a href=&#34;https://en.wikipedia.org/wiki/Generalized_first-price_auction&#34; target=&#34;_blank&#34;&gt;&lt;em&gt;Generalized First Price Auction&lt;/em&gt;&lt;/a&gt;. It is similar to a traditional open bid first price auction. The important features of this auction are as follows
+- Advertisers can now target their &lt;em&gt;Ads&lt;/em&gt; for specific keywords instead of tickers or banners
+- Advertisers can bid their willingness to pay on a per-click basis, instead of a flat price. The payments were also immediate and paid per click
+- The bids were arranged in decreasing order, with the highest bid getting the slot with the highest CTR (usually the top most slot), the second highest bid getting the second best slot and so on.
+- If an advertiser wins a slot, the advertiser has to pay value equal to their bid times the CTR of the slot.
+- Advertisers also were allowed to change their bids frequently by looking at the other bids&lt;/p&gt;
+
+&lt;p&gt;Owing to its novelty and advantages over the previous mechanisms, Overture&amp;rsquo;s GFP was a success and Yahoo! and MSN were among the top users of GFP. However, the mechanism itself was unstable and flawed.&lt;/p&gt;
+
+&lt;h3 id=&#34;example&#34;&gt;&lt;strong&gt;Example&lt;/strong&gt;:&lt;/h3&gt;
+
+&lt;p&gt;Consider that for a specific key word, there are three slots and four advertisers competing for the slots. The click through rates of the slots are 400, 200 and 100 (clicks per hour). The advertisers 1, 2, 3, 4 have values $ \$10, \$5, \$2, \$1$ respectively.Note that the advertisers know the values of the other bidders.&lt;/p&gt;
+
+&lt;p&gt;Under the GFP mechanism, suppose advertiser 3 bids $ \$1.01$ to guarantee that he gets a slot (because advertiser 4 would not want to pay more than her value, i.e.  $\$1$). Noticing this, advertiser 2 would revise her bid to $ \$1.02$ because she does not need to pay more than that to get the second best slot. Similarly, advertiser 1 would want to revise the bid to $ \$1.03$ for the same reason. But advertiser can now revise the bid to $ \$1.04$ to win the top slot (CTR 400) which is four times more valuable than the third slot (CTR 100). And, the cycle continues.&lt;/p&gt;
+
+&lt;p&gt;Clearly, there is no pure strategy equilibrium, and the competitive revision of bids continues. This gives an unfair advantage to bidders with high compute power to algorithmically outbid their competitors. Remember that the goal of the search engine is to maximize it&amp;rsquo;s own profit, the amount earned through the payments made by the bidders.&lt;/p&gt;
+
+&lt;h1 id=&#34;generalized-second-price-auctions&#34;&gt;Generalized Second Price Auctions&lt;/h1&gt;
+
+&lt;p&gt;Realizing that no bidder at position $i$ (in the decreasing order of bids) wants to pay more than the bidder at position $i+1$, as can be seen from the above example,
+Google came up with their own pay-per-click system, called AdWords Select in February 2002. Their system follows a &lt;a href=&#34;https://en.wikipedia.org/wiki/Generalized_second-price_auction&#34; target=&#34;_blank&#34;&gt;&lt;em&gt;Generalized Second Price&lt;/em&gt;&lt;/a&gt; mechanism, where the advertiser at position $i$ pays the bid of the advertiser in position in $i+1$ plus a minimum increment (say $ \$0.01$). Let us consider the above example and evaluate payments made while employing a &lt;em&gt;GSP&lt;/em&gt; structure.&lt;/p&gt;
+
+&lt;h3 id=&#34;example-1&#34;&gt;&lt;strong&gt;Example&lt;/strong&gt;:&lt;/h3&gt;
+
+&lt;p&gt;Consider that the advertisers bid truthfully (i.e. bid their actual values). Then the three slots 1,2,3 go to advertisers 1,2,3 respectively.
+- The payment made by advertiser 3 is $ \$101\ (=1.01\times 100)$ and the profit is $ \$99\ (=2\times100-101)$
+- The payment made by advertiser 2 is $ \$402\ (=2.01\times200)$ and the profit is $ \$598\ (=5\times200-402)$
+- The payment made by advertiser 1 is $ \$2004\ (=5.01\times400)$ and the profit is $ \$1996\ (=10\times400-2004)$&lt;/p&gt;
+
+&lt;p&gt;The total payment received by the search engine is $ \$2507$. Contrastingly, in the &lt;em&gt;GFP&lt;/em&gt; example, there was no equilibrium payment like above.&lt;/p&gt;
+
+&lt;p&gt;Let us consider another example when the advertisers do not bid truthfully.&lt;/p&gt;
+
+&lt;h3 id=&#34;example-2&#34;&gt;&lt;strong&gt;Example&lt;/strong&gt;:&lt;/h3&gt;
+
+&lt;p&gt;Consider that the CTRs of the three slots are comparable, say 400, 390, 380 respectively. Then if everyone bids truthfully, advertiser 1 pays $ \$2004$ and the profit is $ \$1996$. However, if advertiser underbids, say $ \$2.02$, he can still ensure slot 2. His payment is then $ \$3112=(10-2.02)\times390$ which is greater than $ \$1996$ if he bids truthfully.&lt;/p&gt;
+
+&lt;p&gt;Despite the fact that &lt;em&gt;GSP&lt;/em&gt; doesn&amp;rsquo;t ensure truthful behavior, it is widely used because it is amazingly simple. It is interesting to note that most search engines including Google still use a variant of &lt;em&gt;GSP&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h1 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h1&gt;
+
+&lt;p&gt;Around two decades ago, innovative mechanism designs fueled the growth of on-line advertising and helped the dot com industry flourish. Today, the world is set to witness revolutionary changes in the way people move from one place to another. With autonomous ride sharing, ride hailing services becoming increasingly popular, we can expect new modes of advertising (may be call it in-transit advertising) with immersive multimedia technologies and what not. Recently
+&lt;a href=&#34;http://fortune.com/2017/11/29/intel-partners-warner-bros-self-driving-cars/&#34; target=&#34;_blank&#34;&gt;Intel and Warner Bros&lt;/a&gt;  joined hands to develop tech to enhance immersive experience of riders for entertainment and advertising. I would not be surprised to expect a future where you subscribe to Ad-free rides by paying more.&lt;/p&gt;
+
+&lt;p&gt;It is important to develop the tech to make autonomous vehicles safe for the public, but it is even more important to build revenue models that enable ride hailing services generate revenue to stay competitive. We can only wait and see how advertising (and mechanism design) can play its part in shaping the future of our transportation.&lt;/p&gt;
+
+&lt;h2 id=&#34;references&#34;&gt;References&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Edelman, B., Ostrovsky, M. and Schwarz, M., 2007. Internet advertising and the generalized second-price auction: Selling billions of dollars worth of keywords. American economic review, 97(1), pp.242-259.&lt;/li&gt;
+&lt;/ol&gt;
 </description>
     </item>
     

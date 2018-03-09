@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on epsilon</title>
+    <title>Posts on Jayanth</title>
     <link>https://jayanthrr.github.io/post/</link>
-    <description>Recent content in Posts on epsilon</description>
+    <description>Recent content in Posts on Jayanth</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
@@ -18,15 +18,16 @@
       <pubDate>Tue, 27 Feb 2018 14:29:56 -0500</pubDate>
       
       <guid>https://jayanthrr.github.io/post/rollout/</guid>
-      <description></description>
+      <description>Life can only be understood going backwards, but it must be lived going forwards - Kierkegaard.
+Dynamic Programming is a mathematical technique that is used in several fields of research including economics, finance, engineering. It deals with making decisions over different stages of the problem in order to minimize (or maximize) a corresponding cost function (or reward). The outcome of a decision at a given stage can be fully predicted (deterministic) or can only be partially predicted (with randomness involved).</description>
     </item>
     
     <item>
       <title>Mechanism Design and Sponsored Search Auctions</title>
-      <link>https://jayanthrr.github.io/post/_p1/</link>
+      <link>https://jayanthrr.github.io/post/sponsored/</link>
       <pubDate>Tue, 27 Feb 2018 12:40:58 -0500</pubDate>
       
-      <guid>https://jayanthrr.github.io/post/_p1/</guid>
+      <guid>https://jayanthrr.github.io/post/sponsored/</guid>
       <description>If you are watching a video on You Tube and the video is paused for an annoying 30 sec advertisement, you probably should know the history behind on-line advertisements. In fact, advertising and internet helped each other attain their respective potentials. Without advertising, there wouldn&amp;rsquo;t be any Google or Facebook (may be not in the present form), and without any internet, you probably wouldn&amp;rsquo;t know about a tourist package in a remote island like Madeira.</description>
     </item>
     
