@@ -20,4 +20,4 @@ preview = true
 
 +++
 
-[DP](DP1.png)
+![DP](/img/DP1.png)
