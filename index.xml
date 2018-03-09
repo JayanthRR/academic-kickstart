@@ -29,7 +29,7 @@
     </item>
     
     <item>
-      <title>Rollout</title>
+      <title>Rollout: Approximate Dynamic Programming</title>
       <link>https://jayanthrr.github.io/post/rollout/</link>
       <pubDate>Tue, 27 Feb 2018 14:29:56 -0500</pubDate>
       
@@ -44,54 +44,52 @@
 
 &lt;p&gt;In this blog post, we shall look at a specific technique called &lt;em&gt;Rollout Algorithm&lt;/em&gt; that is quite extensively used (with surprisingly good results). In fact, &lt;a href=&#34;https://www.nature.com/articles/nature16961&#34; target=&#34;_blank&#34;&gt;Mastering the game of Go, DeepMind&lt;/a&gt; uses a variant of &lt;em&gt;Rollout&lt;/em&gt; called &lt;em&gt;Monte Carlo Tree Search&lt;/em&gt;. We shall first formulate a DP problem, state the DP algorithm and illustrate with an example the infeasibility of DP. Using the same example, we shall study how &lt;em&gt;Rollout&lt;/em&gt; offers an effective solution that optimizes the trade-off between accuracy and computation. This post is entirely based on my reading of the book &lt;a href=&#34;http://web.mit.edu/dimitrib/www/dpchapter.html&#34; target=&#34;_blank&#34;&gt;Approximate Dynamic Programming&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://jayanthrr.github.io/img/DP1.png&#34; alt=&#34;DP&#34; /&gt;&lt;/p&gt;
-
 &lt;h1 id=&#34;dp-formulation&#34;&gt;DP formulation&lt;/h1&gt;
 
-&lt;p&gt;In this post, we shall focus only on finite horizon problems (problems involving a finite number of stages or time steps at which a decision is taken). We denote the state of the system at time $k$ as $x&lt;em&gt;{k}$ (belongs to a space $S&lt;/em&gt;{k}$), and the decision (or control) taken as $u&lt;em&gt;{k}$ (belongs to a space $U&lt;/em&gt;{k}(x&lt;em&gt;{k})$), and a random variable $w&lt;/em&gt;{k}$ (which is independent of other $w_{i}$) that affects the system. The system has the form&lt;/p&gt;
+&lt;p&gt;In this post, we shall focus only on finite horizon problems (problems involving a finite number of stages or time steps at which a decision is taken). We denote the state of the system at time $k$ as $x{_k}$ (belongs to a space $S{_k}$ ), and the decision (or control) taken as $u{_k}$ (belongs to a space $U{_k} (x{_k}) $ ), and a random variable $w{_k}$ (which is independent of other $w{_i}$) that affects the system. The system has the form&lt;/p&gt;
 
-&lt;p&gt;$$x&lt;em&gt;{k+1} = f&lt;/em&gt;{k}(x&lt;em&gt;{k}, u&lt;/em&gt;{k}, w_{k}) $$&lt;/p&gt;
+&lt;p&gt;$$x_{k+1} = f_{k}(x_{k}, u_{k}, w_{k})$$&lt;/p&gt;
 
-&lt;p&gt;where $k$ takes a value between $0$ and $N$ (finite horizon). At each stage, there is a cost incurred $g&lt;em&gt;{k}(x&lt;/em&gt;{k}, u&lt;em&gt;{k}, w&lt;/em&gt;{k})$ which accumulates over time. The total cost incurred is then&lt;/p&gt;
+&lt;p&gt;where $k$ takes a value between $0$ and $N$ (finite horizon). At each stage, there is a cost incurred $g{_k}(x{_k}, u{_k}, w{_k})$ which accumulates over time. The total cost incurred is then&lt;/p&gt;
 
-&lt;p&gt;$$ g&lt;em&gt;{N}(x&lt;/em&gt;{N}) + \sum&lt;em&gt;{k=0}^{N-1}g&lt;/em&gt;{k}(x&lt;em&gt;{k}, u&lt;/em&gt;{k}, w_{k})$$&lt;/p&gt;
+&lt;p&gt;$$ g_{N}(x_{N}) + \sum_{k=0}^{N-1}g_{k}(x_{k}, u_{k}, w_{k})$$&lt;/p&gt;
 
-&lt;p&gt;where $g&lt;em&gt;{N}(x&lt;/em&gt;{N})$ is a terminal cost incurred at the final stage (it only depends on the state, and no action is to be taken). The objective of the problem is to find an optimal policy&lt;/p&gt;
+&lt;p&gt;where $g {_N}(x{_N})$ is a terminal cost incurred at the final stage (it only depends on the state, and no action is to be taken). The objective of the problem is to find an optimal policy&lt;/p&gt;
 
-&lt;p&gt;$$\pi:= {\mu&lt;em&gt;{0},..,\mu&lt;/em&gt;{k},.. \mu_{N-1}}$$&lt;/p&gt;
+&lt;p&gt;$$\pi:= {\mu_{0},..,\mu_{k},.. \mu_{N-1}}$$&lt;/p&gt;
 
-&lt;p&gt;(where $\mu&lt;em&gt;{k} = u&lt;/em&gt;{k}(x&lt;em&gt;{k})$) that minimizes the expected cost (we take an expectation due to the random variable $w&lt;/em&gt;{k}$). Given an initial state $x&lt;em&gt;{0}$, the expected cost of following a policy $\pi$ starting from $x&lt;/em&gt;{0}$ is denoted as&lt;/p&gt;
+&lt;p&gt;(where $\mu_{k} = u_{k}(x_{k})$) that minimizes the expected cost (we take an expectation due to the random variable $w_{k}$). Given an initial state $x_{0}$, the expected cost of following a policy $\pi$ starting from $x_0$ is denoted as&lt;/p&gt;
 
-&lt;p&gt;$$ J&lt;em&gt;{\pi}(x&lt;/em&gt;{0}) = \mathbb{E}\big[g&lt;em&gt;{N}(x&lt;/em&gt;{N}) + \sum&lt;em&gt;{k=0}^{N-1}g&lt;/em&gt;{k}(x&lt;em&gt;{k}, u&lt;/em&gt;{k}, w_{k})]$$&lt;/p&gt;
+&lt;p&gt;$$ J_{\pi}(x_{0}) = \mathbb{E}\big[g_{N}(x_{N}) + \sum_{k=0}^{N-1}g_{k}(x_{k}, u_{k}, w_{k})]$$&lt;/p&gt;
 
 &lt;p&gt;An optimal policy $\pi^{*}$ is the one that minimizes this expected cost; i.e,&lt;/p&gt;
 
-&lt;p&gt;$$ J&lt;em&gt;{\pi^{*}}(x&lt;/em&gt;{0}) = \min&lt;em&gt;{\pi \in \Pi} J&lt;/em&gt;{\pi}(x_{0})$$&lt;/p&gt;
+&lt;p&gt;$$ J_{\pi^{*}}(x_{0}) = \min_{\pi \in \Pi} J_{\pi}(x_{0})$$&lt;/p&gt;
 
 &lt;p&gt;where $\Pi$ is the space of admissible policies.&lt;/p&gt;
 
 &lt;h1 id=&#34;bellman-s-principle-of-optimality-and-the-dp-algorithm&#34;&gt;Bellman&amp;rsquo;s principle of optimality and the DP algorithm&lt;/h1&gt;
 
-&lt;p&gt;Let $\pi^{*}={\mu&lt;em&gt;{0}^{*},..,\mu&lt;/em&gt;{k}^{*},.. \mu&lt;em&gt;{N-1}^{*}}$ be an optimal policy of the problem stated above, and assume that when using $\pi^{*}$, a given state $x&lt;/em&gt;{i}$ occurs at time $i$ with positive probability. Consider the subproblem, whereby we are at $x_{i}$ at time $i$ and wish to minimze the &amp;ldquo;cost-to-go&amp;rdquo; from time $i$ to time $N$&lt;/p&gt;
+&lt;p&gt;Let $\pi^{*}={\mu_{0}^{*},..,\mu_{k}^{*},.. \mu_{N-1}^{*}}$ be an optimal policy of the problem stated above, and assume that when using $\pi^{*}$, a given state $x_{i}$ occurs at time $i$ with positive probability. Consider the subproblem, whereby we are at $x_{i}$ at time $i$ and wish to minimze the &amp;ldquo;cost-to-go&amp;rdquo; from time $i$ to time $N$&lt;/p&gt;
 
-&lt;p&gt;$$ \mathbb{E}\bigg[g&lt;em&gt;{N}(x&lt;/em&gt;{N}) + \sum&lt;em&gt;{k=i}^{N-1}g&lt;/em&gt;{k}(x&lt;em&gt;{k}, u&lt;/em&gt;{k}, w_{k})\bigg]$$&lt;/p&gt;
+&lt;p&gt;$$ \mathbb{E}\bigg[g_{N}(x_{N}) + \sum_{k=i}^{N-1}g_{k}(x_{k}, u_{k}, w_{k})\bigg]$$&lt;/p&gt;
 
-&lt;p&gt;Then the truncated policy ${\mu&lt;em&gt;{i}^{*},\mu&lt;/em&gt;{i+1}^{*},.. \mu_{N-1}^{*}}$ is optimal for this subproblem.&lt;/p&gt;
+&lt;p&gt;Then the truncated policy ${\mu_{i}^{*},\mu_{i+1}^{*},.. \mu_{N-1}^{*}}$ is optimal for this subproblem.&lt;/p&gt;
 
 &lt;p&gt;Intuitively, let us look at the following problem where we start from A and we need to reach the destination E, and the edge weights are the costs incurred for traversing that edge. The path that minimizes the cost is A-B-D-E. Equivalently, the decision (corresponds to choosing the next node) taken at each time step are B at k=0, D at k=1 and E at k=2. If the policy determined by the path A-B-D-E is optimal, then the truncated path B-D-E is also optimal. If it were not, then we can further reduce the cost by choosing the optimal path which contradicts the fact that A-B-D-E is the path with the minimum cost.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;../images/DP1.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://jayanthrr.github.io/img/DP1.png&#34; alt=&#34;DP&#34; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;dp-algorithm&#34;&gt;DP Algorithm&lt;/h2&gt;
 
 &lt;p&gt;The DP algorithm proceeds as follows. We start from the last step of decision making ($N-1$) and proceed backwards performing the minimization&lt;/p&gt;
 
-&lt;p&gt;$$ J&lt;em&gt;{N}(x&lt;/em&gt;{N}) = g&lt;em&gt;{N}(x&lt;/em&gt;{N}) $$&lt;/p&gt;
+&lt;p&gt;$$ J_{N}(x_{N}) = g_{N}(x_{N}) $$&lt;/p&gt;
 
-&lt;p&gt;$$ J&lt;em&gt;{k}(x&lt;/em&gt;{k}) = \min&lt;em&gt;{u&lt;/em&gt;{k}\in U&lt;em&gt;{k}(x&lt;/em&gt;{k})} \mathbb{E}&lt;em&gt;{w&lt;/em&gt;{k}}\bigg[g&lt;em&gt;{N}(x&lt;/em&gt;{N}) + \sum&lt;em&gt;{k=0}^{N-1}g&lt;/em&gt;{k}(x&lt;em&gt;{k}, u&lt;/em&gt;{k}, w_{k})\bigg], k = 0,1,..,N-1$$&lt;/p&gt;
+&lt;p&gt;$$ J_{k}(x_{k}) =\min_{u_{k} \in U_{k}(x_{k})}\mathbb{E}_{w_{k}}\bigg[g_{N}(x_{N}) + \sum_{k=0}^{N-1}g_{k}(x_{k}, u_{k}, w_{k})\bigg], k = 0,1,..,N-1$$&lt;/p&gt;
 
-&lt;p&gt;where the expectation is taken with respect to the probability distribution of $w&lt;em&gt;{k}$ which is assumed to depend on $x&lt;/em&gt;{k}, u&lt;em&gt;{k}$. Furthermore, if
-$\mu^{*}&lt;/em&gt;{k}=u&lt;em&gt;{k}^{*}(x&lt;/em&gt;{k})$ minimizes the above equation, then the policy $\pi^{*}={\mu&lt;em&gt;{0}{*},&amp;hellip;,\mu&lt;/em&gt;{k}{*},&amp;hellip;,\mu_{N-1}{*}}$ is optimal.&lt;/p&gt;
+&lt;p&gt;where the expectation is taken with respect to the probability distribution of $w_{k}$ which is assumed to depend on $x_{k}, u_{k}$. Furthermore, if
+$\mu^{*}_{k}=u_{k}^{*}(x_{k})$ minimizes the above equation, then the policy $\pi^{*}={\mu_{0}{*},&amp;hellip;,\mu_{k}{*},&amp;hellip;,\mu_{N-1}{*}}$ is optimal.&lt;/p&gt;
 
 &lt;h1 id=&#34;example&#34;&gt;Example&lt;/h1&gt;
 

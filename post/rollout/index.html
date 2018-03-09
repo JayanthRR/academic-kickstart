@@ -76,7 +76,7 @@ Dynamic Programming is a mathematical technique that is used in several fields o
   
   <meta property="og:site_name" content="Jayanth">
   <meta property="og:url" content="https://jayanthrr.github.io/post/rollout/">
-  <meta property="og:title" content="Rollout | Jayanth">
+  <meta property="og:title" content="Rollout: Approximate Dynamic Programming | Jayanth">
   <meta property="og:description" content="Life can only be understood going backwards, but it must be lived going forwards - Kierkegaard.
 Dynamic Programming is a mathematical technique that is used in several fields of research including economics, finance, engineering. It deals with making decisions over different stages of the problem in order to minimize (or maximize) a corresponding cost function (or reward). The outcome of a decision at a given stage can be fully predicted (deterministic) or can only be partially predicted (with randomness involved).">
   <meta property="og:locale" content="en-us">
@@ -88,7 +88,7 @@ Dynamic Programming is a mathematical technique that is used in several fields o
 
   
 
-  <title>Rollout | Jayanth</title>
+  <title>Rollout: Approximate Dynamic Programming | Jayanth</title>
 
 </head>
 <body id="top" data-spy="scroll" data-target="#toc" data-offset="71" >
@@ -228,7 +228,7 @@ Dynamic Programming is a mathematical technique that is used in several fields o
 
 
   <div class="article-container">
-    <h1 itemprop="name">Rollout</h1>
+    <h1 itemprop="name">Rollout: Approximate Dynamic Programming</h1>
 
     
 
@@ -268,7 +268,7 @@ Dynamic Programming is a mathematical technique that is used in several fields o
   <ul class="share">
     <li>
       <a class="twitter"
-         href="https://twitter.com/intent/tweet?text=Rollout&amp;url=https%3a%2f%2fjayanthrr.github.io%2fpost%2frollout%2f"
+         href="https://twitter.com/intent/tweet?text=Rollout%3a%20Approximate%20Dynamic%20Programming&amp;url=https%3a%2f%2fjayanthrr.github.io%2fpost%2frollout%2f"
          target="_blank" rel="noopener">
         <i class="fa fa-twitter"></i>
       </a>
@@ -282,21 +282,21 @@ Dynamic Programming is a mathematical technique that is used in several fields o
     </li>
     <li>
       <a class="linkedin"
-         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fjayanthrr.github.io%2fpost%2frollout%2f&amp;title=Rollout"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fjayanthrr.github.io%2fpost%2frollout%2f&amp;title=Rollout%3a%20Approximate%20Dynamic%20Programming"
          target="_blank" rel="noopener">
         <i class="fa fa-linkedin"></i>
       </a>
     </li>
     <li>
       <a class="weibo"
-         href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fjayanthrr.github.io%2fpost%2frollout%2f&amp;title=Rollout"
+         href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fjayanthrr.github.io%2fpost%2frollout%2f&amp;title=Rollout%3a%20Approximate%20Dynamic%20Programming"
          target="_blank" rel="noopener">
         <i class="fa fa-weibo"></i>
       </a>
     </li>
     <li>
       <a class="email"
-         href="mailto:?subject=Rollout&amp;body=https%3a%2f%2fjayanthrr.github.io%2fpost%2frollout%2f">
+         href="mailto:?subject=Rollout%3a%20Approximate%20Dynamic%20Programming&amp;body=https%3a%2f%2fjayanthrr.github.io%2fpost%2frollout%2f">
         <i class="fa fa-envelope"></i>
       </a>
     </li>
@@ -320,54 +320,52 @@ Dynamic Programming is a mathematical technique that is used in several fields o
 
 <p>In this blog post, we shall look at a specific technique called <em>Rollout Algorithm</em> that is quite extensively used (with surprisingly good results). In fact, <a href="https://www.nature.com/articles/nature16961" target="_blank">Mastering the game of Go, DeepMind</a> uses a variant of <em>Rollout</em> called <em>Monte Carlo Tree Search</em>. We shall first formulate a DP problem, state the DP algorithm and illustrate with an example the infeasibility of DP. Using the same example, we shall study how <em>Rollout</em> offers an effective solution that optimizes the trade-off between accuracy and computation. This post is entirely based on my reading of the book <a href="http://web.mit.edu/dimitrib/www/dpchapter.html" target="_blank">Approximate Dynamic Programming</a>.</p>
 
-<p><img src="/img/DP1.png" alt="DP" /></p>
-
 <h1 id="dp-formulation">DP formulation</h1>
 
-<p>In this post, we shall focus only on finite horizon problems (problems involving a finite number of stages or time steps at which a decision is taken). We denote the state of the system at time $k$ as $x<em>{k}$ (belongs to a space $S</em>{k}$), and the decision (or control) taken as $u<em>{k}$ (belongs to a space $U</em>{k}(x<em>{k})$), and a random variable $w</em>{k}$ (which is independent of other $w_{i}$) that affects the system. The system has the form</p>
+<p>In this post, we shall focus only on finite horizon problems (problems involving a finite number of stages or time steps at which a decision is taken). We denote the state of the system at time $k$ as $x{_k}$ (belongs to a space $S{_k}$ ), and the decision (or control) taken as $u{_k}$ (belongs to a space $U{_k} (x{_k}) $ ), and a random variable $w{_k}$ (which is independent of other $w{_i}$) that affects the system. The system has the form</p>
 
-<p>$$x<em>{k+1} = f</em>{k}(x<em>{k}, u</em>{k}, w_{k}) $$</p>
+<p>$$x_{k+1} = f_{k}(x_{k}, u_{k}, w_{k})$$</p>
 
-<p>where $k$ takes a value between $0$ and $N$ (finite horizon). At each stage, there is a cost incurred $g<em>{k}(x</em>{k}, u<em>{k}, w</em>{k})$ which accumulates over time. The total cost incurred is then</p>
+<p>where $k$ takes a value between $0$ and $N$ (finite horizon). At each stage, there is a cost incurred $g{_k}(x{_k}, u{_k}, w{_k})$ which accumulates over time. The total cost incurred is then</p>
 
-<p>$$ g<em>{N}(x</em>{N}) + \sum<em>{k=0}^{N-1}g</em>{k}(x<em>{k}, u</em>{k}, w_{k})$$</p>
+<p>$$ g_{N}(x_{N}) + \sum_{k=0}^{N-1}g_{k}(x_{k}, u_{k}, w_{k})$$</p>
 
-<p>where $g<em>{N}(x</em>{N})$ is a terminal cost incurred at the final stage (it only depends on the state, and no action is to be taken). The objective of the problem is to find an optimal policy</p>
+<p>where $g {_N}(x{_N})$ is a terminal cost incurred at the final stage (it only depends on the state, and no action is to be taken). The objective of the problem is to find an optimal policy</p>
 
-<p>$$\pi:= {\mu<em>{0},..,\mu</em>{k},.. \mu_{N-1}}$$</p>
+<p>$$\pi:= {\mu_{0},..,\mu_{k},.. \mu_{N-1}}$$</p>
 
-<p>(where $\mu<em>{k} = u</em>{k}(x<em>{k})$) that minimizes the expected cost (we take an expectation due to the random variable $w</em>{k}$). Given an initial state $x<em>{0}$, the expected cost of following a policy $\pi$ starting from $x</em>{0}$ is denoted as</p>
+<p>(where $\mu_{k} = u_{k}(x_{k})$) that minimizes the expected cost (we take an expectation due to the random variable $w_{k}$). Given an initial state $x_{0}$, the expected cost of following a policy $\pi$ starting from $x_0$ is denoted as</p>
 
-<p>$$ J<em>{\pi}(x</em>{0}) = \mathbb{E}\big[g<em>{N}(x</em>{N}) + \sum<em>{k=0}^{N-1}g</em>{k}(x<em>{k}, u</em>{k}, w_{k})]$$</p>
+<p>$$ J_{\pi}(x_{0}) = \mathbb{E}\big[g_{N}(x_{N}) + \sum_{k=0}^{N-1}g_{k}(x_{k}, u_{k}, w_{k})]$$</p>
 
 <p>An optimal policy $\pi^{*}$ is the one that minimizes this expected cost; i.e,</p>
 
-<p>$$ J<em>{\pi^{*}}(x</em>{0}) = \min<em>{\pi \in \Pi} J</em>{\pi}(x_{0})$$</p>
+<p>$$ J_{\pi^{*}}(x_{0}) = \min_{\pi \in \Pi} J_{\pi}(x_{0})$$</p>
 
 <p>where $\Pi$ is the space of admissible policies.</p>
 
 <h1 id="bellman-s-principle-of-optimality-and-the-dp-algorithm">Bellman&rsquo;s principle of optimality and the DP algorithm</h1>
 
-<p>Let $\pi^{*}={\mu<em>{0}^{*},..,\mu</em>{k}^{*},.. \mu<em>{N-1}^{*}}$ be an optimal policy of the problem stated above, and assume that when using $\pi^{*}$, a given state $x</em>{i}$ occurs at time $i$ with positive probability. Consider the subproblem, whereby we are at $x_{i}$ at time $i$ and wish to minimze the &ldquo;cost-to-go&rdquo; from time $i$ to time $N$</p>
+<p>Let $\pi^{*}={\mu_{0}^{*},..,\mu_{k}^{*},.. \mu_{N-1}^{*}}$ be an optimal policy of the problem stated above, and assume that when using $\pi^{*}$, a given state $x_{i}$ occurs at time $i$ with positive probability. Consider the subproblem, whereby we are at $x_{i}$ at time $i$ and wish to minimze the &ldquo;cost-to-go&rdquo; from time $i$ to time $N$</p>
 
-<p>$$ \mathbb{E}\bigg[g<em>{N}(x</em>{N}) + \sum<em>{k=i}^{N-1}g</em>{k}(x<em>{k}, u</em>{k}, w_{k})\bigg]$$</p>
+<p>$$ \mathbb{E}\bigg[g_{N}(x_{N}) + \sum_{k=i}^{N-1}g_{k}(x_{k}, u_{k}, w_{k})\bigg]$$</p>
 
-<p>Then the truncated policy ${\mu<em>{i}^{*},\mu</em>{i+1}^{*},.. \mu_{N-1}^{*}}$ is optimal for this subproblem.</p>
+<p>Then the truncated policy ${\mu_{i}^{*},\mu_{i+1}^{*},.. \mu_{N-1}^{*}}$ is optimal for this subproblem.</p>
 
 <p>Intuitively, let us look at the following problem where we start from A and we need to reach the destination E, and the edge weights are the costs incurred for traversing that edge. The path that minimizes the cost is A-B-D-E. Equivalently, the decision (corresponds to choosing the next node) taken at each time step are B at k=0, D at k=1 and E at k=2. If the policy determined by the path A-B-D-E is optimal, then the truncated path B-D-E is also optimal. If it were not, then we can further reduce the cost by choosing the optimal path which contradicts the fact that A-B-D-E is the path with the minimum cost.</p>
 
-<p><img src="../images/DP1.png" alt="" /></p>
+<p><img src="/img/DP1.png" alt="DP" /></p>
 
 <h2 id="dp-algorithm">DP Algorithm</h2>
 
 <p>The DP algorithm proceeds as follows. We start from the last step of decision making ($N-1$) and proceed backwards performing the minimization</p>
 
-<p>$$ J<em>{N}(x</em>{N}) = g<em>{N}(x</em>{N}) $$</p>
+<p>$$ J_{N}(x_{N}) = g_{N}(x_{N}) $$</p>
 
-<p>$$ J<em>{k}(x</em>{k}) = \min<em>{u</em>{k}\in U<em>{k}(x</em>{k})} \mathbb{E}<em>{w</em>{k}}\bigg[g<em>{N}(x</em>{N}) + \sum<em>{k=0}^{N-1}g</em>{k}(x<em>{k}, u</em>{k}, w_{k})\bigg], k = 0,1,..,N-1$$</p>
+<p>$$ J_{k}(x_{k}) =\min_{u_{k} \in U_{k}(x_{k})}\mathbb{E}_{w_{k}}\bigg[g_{N}(x_{N}) + \sum_{k=0}^{N-1}g_{k}(x_{k}, u_{k}, w_{k})\bigg], k = 0,1,..,N-1$$</p>
 
-<p>where the expectation is taken with respect to the probability distribution of $w<em>{k}$ which is assumed to depend on $x</em>{k}, u<em>{k}$. Furthermore, if
-$\mu^{*}</em>{k}=u<em>{k}^{*}(x</em>{k})$ minimizes the above equation, then the policy $\pi^{*}={\mu<em>{0}{*},&hellip;,\mu</em>{k}{*},&hellip;,\mu_{N-1}{*}}$ is optimal.</p>
+<p>where the expectation is taken with respect to the probability distribution of $w_{k}$ which is assumed to depend on $x_{k}, u_{k}$. Furthermore, if
+$\mu^{*}_{k}=u_{k}^{*}(x_{k})$ minimizes the above equation, then the policy $\pi^{*}={\mu_{0}{*},&hellip;,\mu_{k}{*},&hellip;,\mu_{N-1}{*}}$ is optimal.</p>
 
 <h1 id="example">Example</h1>
 
