@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Projects on Jayanth</title>
+    <link>https://jayanthrr.github.io/project/</link>
+    <description>Recent content in Projects on Jayanth</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Thu, 08 Mar 2018 22:32:58 -0500</lastBuildDate>
+    
+	<atom:link href="https://jayanthrr.github.io/project/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Fake News Challenge- stage 1</title>
+      <link>https://jayanthrr.github.io/project/fnc/</link>
+      <pubDate>Thu, 08 Mar 2018 22:32:58 -0500</pubDate>
+      
+      <guid>https://jayanthrr.github.io/project/fnc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Connected and Autonomous Traffic Simulator</title>
+      <link>https://jayanthrr.github.io/project/cats/</link>
+      <pubDate>Thu, 08 Mar 2018 22:29:56 -0500</pubDate>
+      
+      <guid>https://jayanthrr.github.io/project/cats/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

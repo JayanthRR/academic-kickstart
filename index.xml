@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>epsilon on epsilon</title>
+    <title>Jayanth on Jayanth</title>
     <link>https://jayanthrr.github.io/</link>
-    <description>Recent content in epsilon on epsilon</description>
+    <description>Recent content in Jayanth on Jayanth</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
@@ -11,20 +11,39 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Fake News Challenge- stage 1</title>
+      <link>https://jayanthrr.github.io/project/fnc/</link>
+      <pubDate>Thu, 08 Mar 2018 22:32:58 -0500</pubDate>
+      
+      <guid>https://jayanthrr.github.io/project/fnc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Connected and Autonomous Traffic Simulator</title>
+      <link>https://jayanthrr.github.io/project/cats/</link>
+      <pubDate>Thu, 08 Mar 2018 22:29:56 -0500</pubDate>
+      
+      <guid>https://jayanthrr.github.io/project/cats/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Rollout</title>
       <link>https://jayanthrr.github.io/post/rollout/</link>
       <pubDate>Tue, 27 Feb 2018 14:29:56 -0500</pubDate>
       
       <guid>https://jayanthrr.github.io/post/rollout/</guid>
-      <description></description>
+      <description>&lt;p&gt;&lt;img src=&#34;https://jayanthrr.github.io/img/DP1.png&#34; alt=&#34;DP&#34; /&gt;&lt;/p&gt;
+</description>
     </item>
     
     <item>
       <title>Mechanism Design and Sponsored Search Auctions</title>
-      <link>https://jayanthrr.github.io/post/_p1/</link>
+      <link>https://jayanthrr.github.io/post/sponsored-search/</link>
       <pubDate>Tue, 27 Feb 2018 12:40:58 -0500</pubDate>
       
-      <guid>https://jayanthrr.github.io/post/_p1/</guid>
+      <guid>https://jayanthrr.github.io/post/sponsored-search/</guid>
       <description>
 
 &lt;p&gt;If you are watching a video on You Tube and the video is paused for an annoying 30 sec advertisement, you probably should know the history behind on-line advertisements. In fact, advertising and internet helped each other attain their respective potentials. Without advertising, there wouldn&amp;rsquo;t be any Google or Facebook (may be not in the present form), and without any internet, you probably wouldn&amp;rsquo;t know about a tourist package in a remote island like Madeira.&lt;/p&gt;
