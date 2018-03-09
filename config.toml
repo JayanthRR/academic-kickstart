@@ -6,7 +6,7 @@
 baseurl = "https://jayanthrr.github.io/"
 
 # Title of your site
-title = "epsilon"
+title = "Jayanth"
 
 # Your copyright notice - appears in site footer.
 # To display a copyright symbol, type `&copy;`.
@@ -51,7 +51,7 @@ defaultContentLanguageInSubdir = false
 
   # Your details.
   name = "Jayanth Reddy Regatti"
-  role = "Masters Student"
+  role = "Graduate Research Assistant"
 
   # Organizations/Affiliations.
   #   Separate multiple entries with a comma, using the form: `[ {name="Org1", url=""}, {name="Org2", url=""} ]`.
