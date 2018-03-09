@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Homes on epsilon</title>
+    <link>https://jayanthrr.github.io/home/</link>
+    <description>Recent content in Homes on epsilon</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Wed, 20 Apr 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://jayanthrr.github.io/home/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title></title>
+      <link>https://jayanthrr.github.io/home/about/</link>
+      <pubDate>Wed, 20 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://jayanthrr.github.io/home/about/</guid>
+      <description>Biography I am a graduate student in the department of Electrical and Computer Engineering at The Ohio State University, advised by Dr. Abhishek Gupta. I am passionate about the field of Machine Learning and Artificial Intelligence, and their applications in shaping the transportation of our future. You can download my CV here.
+I am currently working with Dr. Abhishek Gupta, and CAR for developing a software to simulate &amp;ldquo;connected and autonomous urban traffic&amp;rdquo;.</description>
+    </item>
+    
+    <item>
+      <title>Selected Publications</title>
+      <link>https://jayanthrr.github.io/home/publications_selected/</link>
+      <pubDate>Wed, 20 Apr 2016 00:00:00 -0400</pubDate>
+      
+      <guid>https://jayanthrr.github.io/home/publications_selected/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Recent Publications</title>
+      <link>https://jayanthrr.github.io/home/publications/</link>
+      <pubDate>Wed, 20 Apr 2016 00:00:00 -0400</pubDate>
+      
+      <guid>https://jayanthrr.github.io/home/publications/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Recent &amp; Upcoming Talks</title>
+      <link>https://jayanthrr.github.io/home/talks/</link>
+      <pubDate>Wed, 20 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://jayanthrr.github.io/home/talks/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Recent Posts</title>
+      <link>https://jayanthrr.github.io/home/posts/</link>
+      <pubDate>Wed, 20 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://jayanthrr.github.io/home/posts/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Projects</title>
+      <link>https://jayanthrr.github.io/home/projects/</link>
+      <pubDate>Wed, 20 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://jayanthrr.github.io/home/projects/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Custom Section</title>
+      <link>https://jayanthrr.github.io/home/teaching/</link>
+      <pubDate>Wed, 20 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://jayanthrr.github.io/home/teaching/</guid>
+      <description>This is an example of using the custom widget to create your own homepage section.
+To remove this section, either delete content/home/teaching.md or edit the frontmatter of the file to deactivate the widget by setting active = false.</description>
+    </item>
+    
+    <item>
+      <title>Tags</title>
+      <link>https://jayanthrr.github.io/home/tags/</link>
+      <pubDate>Wed, 20 Sep 2017 00:00:00 -0400</pubDate>
+      
+      <guid>https://jayanthrr.github.io/home/tags/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Contact</title>
+      <link>https://jayanthrr.github.io/home/contact/</link>
+      <pubDate>Wed, 20 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://jayanthrr.github.io/home/contact/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
