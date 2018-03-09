@@ -11,30 +11,37 @@ weight = 5
 [interests]
   interests = [
     "Artificial Intelligence",
-    "Computational Linguistics",
-    "Information Retrieval"
+    "Statistical Learning Theory",
+    "Reinforcement Learning",
+    "Autonomous Vehicles"
   ]
 
 # List your qualifications (such as academic degrees).
 [[education.courses]]
-  course = "PhD in Artificial Intelligence"
-  institution = "Stanford University"
-  year = 2012
+  course = "MS in ECE"
+  institution = "The Ohio State University"
+  year = 2018
+  
+
+#[[education.courses]]
+#  course = "MEng in Artificial Intelligence"
+#  institution = "Massachusetts Institute of Technology"
+#  year = 2009
 
 [[education.courses]]
-  course = "MEng in Artificial Intelligence"
-  institution = "Massachusetts Institute of Technology"
-  year = 2009
-
-[[education.courses]]
-  course = "BSc in Artificial Intelligence"
-  institution = "Massachusetts Institute of Technology"
-  year = 2008
+  course = "B.Tech in Electrical Engineering"
+  institution = "Indian Institute of Technology, Hyderabad"
+  year = 2015
  
 +++
 
 # Biography
 
-Lena Smith is a professor of artificial intelligence at the Stanford AI Lab. Her research interests include distributed robotics, mobile computing and programmable matter. She leads the Robotic Neurobiology group, which develops self-reconfiguring robots, systems of self-organizing robots, and mobile sensor networks.
+I am a graduate student in the department of [Electrical and Computer Engineering](https://ece.osu.edu/) at [The Ohio State University](https://engineering.osu.edu/), advised by [Dr. Abhishek Gupta](http://u.osu.edu/gupta.706/). I am passionate about the field of Machine Learning and Artificial Intelligence, and their applications in shaping the transportation of our future. 
+You can download my CV {{% staticref "files/cv.pdf" %}}here.{{% /staticref %}}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate. 
+I am currently working with Dr. Abhishek Gupta, and [CAR](https://car.osu.edu/) for developing a software to simulate "connected and autonomous urban traffic". The software is aimed at providing an environment to enable intelligent transportation systems researchers interface their research with modern machine learning frameworks.
+
+
+
+
