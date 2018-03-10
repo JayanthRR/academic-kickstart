@@ -5,6 +5,33 @@
     
     <url>
     
+      <loc>https://jayanthrr.github.io/project/stochastic/</loc>
+      <lastmod>2018-03-09T02:03:50-05:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>https://jayanthrr.github.io/project/trafficsign/</loc>
+      <lastmod>2018-03-09T01:38:11-05:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>https://jayanthrr.github.io/project/recommender/</loc>
+      <lastmod>2018-03-08T22:46:44-05:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>https://jayanthrr.github.io/project/fnc/</loc>
       <lastmod>2018-03-08T22:32:58-05:00</lastmod>
     </url>
@@ -68,6 +95,16 @@
     
     <url>
     
+      <loc>https://jayanthrr.github.io/tags/approximate-dynamic-programming/</loc>
+      <lastmod>2018-03-09T02:03:50-05:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>https://jayanthrr.github.io/tags/autonomous-vehicles/</loc>
       <lastmod>2018-03-08T22:29:56-05:00</lastmod>
       <priority>0</priority>
@@ -79,6 +116,36 @@
     <url>
     
       <loc>https://jayanthrr.github.io/categories/</loc>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>https://jayanthrr.github.io/tags/collaborative-filtering/</loc>
+      <lastmod>2018-03-08T22:46:44-05:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>https://jayanthrr.github.io/tags/deep-learning/</loc>
+      <lastmod>2018-03-09T01:38:11-05:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>https://jayanthrr.github.io/tags/dynamic-programming/</loc>
+      <lastmod>2018-03-09T02:03:50-05:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -107,6 +174,16 @@
     
     <url>
     
+      <loc>https://jayanthrr.github.io/tags/machine-learning/</loc>
+      <lastmod>2018-03-09T01:38:11-05:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>https://jayanthrr.github.io/tags/nlp/</loc>
       <lastmod>2018-03-08T22:32:58-05:00</lastmod>
       <priority>0</priority>
@@ -117,8 +194,18 @@
     
     <url>
     
+      <loc>https://jayanthrr.github.io/tags/policy-iteration/</loc>
+      <lastmod>2018-03-09T02:03:50-05:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>https://jayanthrr.github.io/project/</loc>
-      <lastmod>2018-03-08T22:32:58-05:00</lastmod>
+      <lastmod>2018-03-09T02:03:50-05:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -128,6 +215,16 @@
     <url>
     
       <loc>https://jayanthrr.github.io/publication_types/</loc>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>https://jayanthrr.github.io/tags/recommender-systems/</loc>
+      <lastmod>2018-03-08T22:46:44-05:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -147,7 +244,7 @@
     <url>
     
       <loc>https://jayanthrr.github.io/tags/</loc>
-      <lastmod>2018-03-08T22:29:56-05:00</lastmod>
+      <lastmod>2018-03-09T02:03:50-05:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -158,6 +255,16 @@
     
       <loc>https://jayanthrr.github.io/tags/traffic-research/</loc>
       <lastmod>2018-03-08T22:29:56-05:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>https://jayanthrr.github.io/tags/transfer-learning/</loc>
+      <lastmod>2018-03-09T01:38:11-05:00</lastmod>
       <priority>0</priority>
     </url>
     

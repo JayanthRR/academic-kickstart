@@ -11,6 +11,35 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Stochastic Shortest Path</title>
+      <link>https://jayanthrr.github.io/project/stochastic/</link>
+      <pubDate>Fri, 09 Mar 2018 02:03:50 -0500</pubDate>
+      
+      <guid>https://jayanthrr.github.io/project/stochastic/</guid>
+      <description>&lt;p&gt;I am currently working on a stochastic shortest path problem in an urban traffic scenario, considering the topological relations between the roads.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Traffic Sign Classification</title>
+      <link>https://jayanthrr.github.io/project/trafficsign/</link>
+      <pubDate>Fri, 09 Mar 2018 01:38:11 -0500</pubDate>
+      
+      <guid>https://jayanthrr.github.io/project/trafficsign/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Course Recommender Engine</title>
+      <link>https://jayanthrr.github.io/project/recommender/</link>
+      <pubDate>Thu, 08 Mar 2018 22:46:44 -0500</pubDate>
+      
+      <guid>https://jayanthrr.github.io/project/recommender/</guid>
+      <description>&lt;p&gt;Built a collaborative filtering based recommender system for selecting courses based on the user&amp;rsquo;s past history using apache spark&amp;rsquo;s MLlib. Developed and demostrated a working prototype in 24 hours during Hack OH/IO 2016.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Fake News Challenge- stage 1</title>
       <link>https://jayanthrr.github.io/project/fnc/</link>
       <pubDate>Thu, 08 Mar 2018 22:32:58 -0500</pubDate>
@@ -25,7 +54,32 @@
       <pubDate>Thu, 08 Mar 2018 22:29:56 -0500</pubDate>
       
       <guid>https://jayanthrr.github.io/project/cats/</guid>
-      <description></description>
+      <description>&lt;p&gt;
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;//player.vimeo.com/video/259290467&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
+ &lt;/div&gt;
+
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;//player.vimeo.com/video/259290463&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
+ &lt;/div&gt;
+
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;//player.vimeo.com/video/259290465&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
+ &lt;/div&gt;
+
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;//player.vimeo.com/video/259290444&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
+ &lt;/div&gt;
+
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;//player.vimeo.com/video/259290451&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
+ &lt;/div&gt;
+&lt;/p&gt;
+</description>
     </item>
     
     <item>
@@ -36,9 +90,24 @@
       <guid>https://jayanthrr.github.io/post/rollout/</guid>
       <description>
 
-&lt;p&gt;&lt;em&gt;Life can only be understood going backwards, but it must be lived going forwards - Kierkegaard&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Life can only be understood going backwards, but it must be lived going forwards - Kierkegaard&lt;/em&gt;.
 
-&lt;p&gt;Dynamic Programming is a mathematical technique that is used in several fields of research including economics, finance, engineering. It deals with making decisions over different stages of the problem in order to minimize (or maximize) a corresponding cost function (or reward). The outcome of a decision at a given stage can be fully predicted (deterministic) or can only be partially predicted (with randomness involved). One key aspect of such problems is the trade off in optimizing the cost incurred at the current stage and the cost to be incurred at a future stage.&lt;/p&gt;
+
+&lt;div class=&#34;gallery&#34;&gt;
+  
+  
+  
+  
+    
+      
+    
+  
+  &lt;a data-fancybox=&#34;gallery-2&#34; data-caption=&#34;Write your image caption here&#34; href=&#34;https://jayanthrr.github.io/img/time.png&#34;&gt;
+    &lt;img alt=&#34;&#34; src=&#34;https://jayanthrr.github.io/img/time.png&#34;&gt;
+  &lt;/a&gt;
+  
+&lt;/div&gt;
+Dynamic Programming is a mathematical technique that is used in several fields of research including economics, finance, engineering. It deals with making decisions over different stages of the problem in order to minimize (or maximize) a corresponding cost function (or reward). The outcome of a decision at a given stage can be fully predicted (deterministic) or can only be partially predicted (with randomness involved). One key aspect of such problems is the trade off in optimizing the cost incurred at the current stage and the cost to be incurred at a future stage.&lt;/p&gt;
 
 &lt;p&gt;Dynamic Programming is very helpful in many contexts by providing an exact solution, however, when the problem size increases, it requires enormous amount of storage and computational time (often referred to as the &lt;em&gt;curse of dimensionality&lt;/em&gt;) which makes it infeasible to apply to practical situations. Often in such situations, one may not desire an exact solution, but an approximately optimal (or suboptimal) solution. Then there must be a better class of techniques that can capture this trade off between feasibility and sub optimality. These techniques are collectively referred to as &lt;em&gt;Approximate Dynamic Programming&lt;/em&gt; or &lt;em&gt;Reinforcement Learning&lt;/em&gt; (in the field of AI) or &lt;em&gt;Neuro Dynamic Programming&lt;/em&gt; (in the field of automatic control), all of which essentially mean the same.&lt;/p&gt;
 
@@ -78,7 +147,35 @@
 
 &lt;p&gt;Intuitively, let us look at the following problem where we start from A and we need to reach the destination E, and the edge weights are the costs incurred for traversing that edge. The path that minimizes the cost is A-B-D-E. Equivalently, the decision (corresponds to choosing the next node) taken at each time step are B at k=0, D at k=1 and E at k=2. If the policy determined by the path A-B-D-E is optimal, then the truncated path B-D-E is also optimal. If it were not, then we can further reduce the cost by choosing the optimal path which contradicts the fact that A-B-D-E is the path with the minimum cost.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://jayanthrr.github.io/img/DP1.png&#34; alt=&#34;DP&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://jayanthrr.github.io/img/draw.jpg&#34; alt=&#34;Draw&#34; /&gt;&lt;/p&gt;
+
+
+&lt;figure&gt;
+    
+        &lt;img src=&#34;https://jayanthrr.github.io/img/time_notitle.png&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;Figure Caption&lt;/h4&gt;
+        
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+
+
+&lt;figure&gt;
+    
+        &lt;img src=&#34;https://jayanthrr.github.io/img/time.png&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;Figure Caption&lt;/h4&gt;
+        
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
 
 &lt;h2 id=&#34;dp-algorithm&#34;&gt;DP Algorithm&lt;/h2&gt;
 

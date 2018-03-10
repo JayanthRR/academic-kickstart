@@ -68,13 +68,12 @@ I am currently working with Dr. Abhishek Gupta, and CAR for developing a softwar
     </item>
     
     <item>
-      <title>Custom Section</title>
+      <title>Teaching</title>
       <link>https://jayanthrr.github.io/home/teaching/</link>
       <pubDate>Wed, 20 Apr 2016 00:00:00 +0000</pubDate>
       
       <guid>https://jayanthrr.github.io/home/teaching/</guid>
-      <description>This is an example of using the custom widget to create your own homepage section.
-To remove this section, either delete content/home/teaching.md or edit the frontmatter of the file to deactivate the widget by setting active = false.</description>
+      <description> Grader: ECE 5759, Non linear Optimization, Fall 2016, Fall 2017 Grader: ECE 3050, Signals and Systems, Spring 2017  </description>
     </item>
     
     <item>

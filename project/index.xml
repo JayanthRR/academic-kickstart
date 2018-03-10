@@ -7,10 +7,37 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Thu, 08 Mar 2018 22:32:58 -0500</lastBuildDate>
+    <lastBuildDate>Fri, 09 Mar 2018 02:03:50 -0500</lastBuildDate>
     
 	<atom:link href="https://jayanthrr.github.io/project/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Stochastic Shortest Path</title>
+      <link>https://jayanthrr.github.io/project/stochastic/</link>
+      <pubDate>Fri, 09 Mar 2018 02:03:50 -0500</pubDate>
+      
+      <guid>https://jayanthrr.github.io/project/stochastic/</guid>
+      <description>I am currently working on a stochastic shortest path problem in an urban traffic scenario, considering the topological relations between the roads.</description>
+    </item>
+    
+    <item>
+      <title>Traffic Sign Classification</title>
+      <link>https://jayanthrr.github.io/project/trafficsign/</link>
+      <pubDate>Fri, 09 Mar 2018 01:38:11 -0500</pubDate>
+      
+      <guid>https://jayanthrr.github.io/project/trafficsign/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Course Recommender Engine</title>
+      <link>https://jayanthrr.github.io/project/recommender/</link>
+      <pubDate>Thu, 08 Mar 2018 22:46:44 -0500</pubDate>
+      
+      <guid>https://jayanthrr.github.io/project/recommender/</guid>
+      <description>Built a collaborative filtering based recommender system for selecting courses based on the user&amp;rsquo;s past history using apache spark&amp;rsquo;s MLlib. Developed and demostrated a working prototype in 24 hours during Hack OH/IO 2016.</description>
+    </item>
     
     <item>
       <title>Fake News Challenge- stage 1</title>
@@ -27,7 +54,7 @@
       <pubDate>Thu, 08 Mar 2018 22:29:56 -0500</pubDate>
       
       <guid>https://jayanthrr.github.io/project/cats/</guid>
-      <description></description>
+      <description>           </description>
     </item>
     
   </channel>

@@ -17,8 +17,7 @@
       
     
   
-  <meta name="description" content="Life can only be understood going backwards, but it must be lived going forwards - Kierkegaard.
-Dynamic Programming is a mathematical technique that is used in several fields of research including economics, finance, engineering. It deals with making decisions over different stages of the problem in order to minimize (or maximize) a corresponding cost function (or reward). The outcome of a decision at a given stage can be fully predicted (deterministic) or can only be partially predicted (with randomness involved).">
+  <meta name="description" content="Life can only be understood going backwards, but it must be lived going forwards - Kierkegaard.   Dynamic Programming is a mathematical technique that is used in several fields of research including economics, finance, engineering. It deals with making decisions over different stages of the problem in order to minimize (or maximize) a corresponding cost function (or reward). The outcome of a decision at a given stage can be fully predicted (deterministic) or can only be partially predicted (with randomness involved).">
 
   
   <link rel="alternate" hreflang="en-us" href="https://jayanthrr.github.io/post/rollout/">
@@ -30,7 +29,7 @@ Dynamic Programming is a mathematical technique that is used in several fields o
 
   
   
-  <meta name="theme-color" content="hsl(339, 90%, 68%)">
+  <meta name="theme-color" content="#3f51b5">
   
   
   
@@ -41,7 +40,7 @@ Dynamic Programming is a mathematical technique that is used in several fields o
     
     
       
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
       
     
   
@@ -77,8 +76,7 @@ Dynamic Programming is a mathematical technique that is used in several fields o
   <meta property="og:site_name" content="Jayanth">
   <meta property="og:url" content="https://jayanthrr.github.io/post/rollout/">
   <meta property="og:title" content="Rollout: Approximate Dynamic Programming | Jayanth">
-  <meta property="og:description" content="Life can only be understood going backwards, but it must be lived going forwards - Kierkegaard.
-Dynamic Programming is a mathematical technique that is used in several fields of research including economics, finance, engineering. It deals with making decisions over different stages of the problem in order to minimize (or maximize) a corresponding cost function (or reward). The outcome of a decision at a given stage can be fully predicted (deterministic) or can only be partially predicted (with randomness involved).">
+  <meta property="og:description" content="Life can only be understood going backwards, but it must be lived going forwards - Kierkegaard.   Dynamic Programming is a mathematical technique that is used in several fields of research including economics, finance, engineering. It deals with making decisions over different stages of the problem in order to minimize (or maximize) a corresponding cost function (or reward). The outcome of a decision at a given stage can be fully predicted (deterministic) or can only be partially predicted (with randomness involved).">
   <meta property="og:locale" content="en-us">
   
   <meta property="article:published_time" content="2018-02-27T14:29:56-05:00">
@@ -91,7 +89,7 @@ Dynamic Programming is a mathematical technique that is used in several fields o
   <title>Rollout: Approximate Dynamic Programming | Jayanth</title>
 
 </head>
-<body id="top" data-spy="scroll" data-target="#toc" data-offset="71" class="dark">
+<body id="top" data-spy="scroll" data-target="#toc" data-offset="71" >
 
 <nav class="navbar navbar-default navbar-fixed-top" id="navbar-main">
   <div class="container">
@@ -312,9 +310,24 @@ Dynamic Programming is a mathematical technique that is used in several fields o
     <div class="article-style" itemprop="articleBody">
       
 
-<p><em>Life can only be understood going backwards, but it must be lived going forwards - Kierkegaard</em>.</p>
+<p><em>Life can only be understood going backwards, but it must be lived going forwards - Kierkegaard</em>.
 
-<p>Dynamic Programming is a mathematical technique that is used in several fields of research including economics, finance, engineering. It deals with making decisions over different stages of the problem in order to minimize (or maximize) a corresponding cost function (or reward). The outcome of a decision at a given stage can be fully predicted (deterministic) or can only be partially predicted (with randomness involved). One key aspect of such problems is the trade off in optimizing the cost incurred at the current stage and the cost to be incurred at a future stage.</p>
+
+<div class="gallery">
+  
+  
+  
+  
+    
+      
+    
+  
+  <a data-fancybox="gallery-2" data-caption="Write your image caption here" href="https://jayanthrr.github.io/img/time.png">
+    <img alt="" src="https://jayanthrr.github.io/img/time.png">
+  </a>
+  
+</div>
+Dynamic Programming is a mathematical technique that is used in several fields of research including economics, finance, engineering. It deals with making decisions over different stages of the problem in order to minimize (or maximize) a corresponding cost function (or reward). The outcome of a decision at a given stage can be fully predicted (deterministic) or can only be partially predicted (with randomness involved). One key aspect of such problems is the trade off in optimizing the cost incurred at the current stage and the cost to be incurred at a future stage.</p>
 
 <p>Dynamic Programming is very helpful in many contexts by providing an exact solution, however, when the problem size increases, it requires enormous amount of storage and computational time (often referred to as the <em>curse of dimensionality</em>) which makes it infeasible to apply to practical situations. Often in such situations, one may not desire an exact solution, but an approximately optimal (or suboptimal) solution. Then there must be a better class of techniques that can capture this trade off between feasibility and sub optimality. These techniques are collectively referred to as <em>Approximate Dynamic Programming</em> or <em>Reinforcement Learning</em> (in the field of AI) or <em>Neuro Dynamic Programming</em> (in the field of automatic control), all of which essentially mean the same.</p>
 
@@ -354,7 +367,35 @@ Dynamic Programming is a mathematical technique that is used in several fields o
 
 <p>Intuitively, let us look at the following problem where we start from A and we need to reach the destination E, and the edge weights are the costs incurred for traversing that edge. The path that minimizes the cost is A-B-D-E. Equivalently, the decision (corresponds to choosing the next node) taken at each time step are B at k=0, D at k=1 and E at k=2. If the policy determined by the path A-B-D-E is optimal, then the truncated path B-D-E is also optimal. If it were not, then we can further reduce the cost by choosing the optimal path which contradicts the fact that A-B-D-E is the path with the minimum cost.</p>
 
-<p><img src="/img/DP1.png" alt="DP" /></p>
+<p><img src="/img/draw.jpg" alt="Draw" /></p>
+
+
+<figure>
+    
+        <img src="/img/time_notitle.png" />
+    
+    
+    <figcaption>
+        <h4>Figure Caption</h4>
+        
+    </figcaption>
+    
+</figure>
+
+
+
+<figure>
+    
+        <img src="/img/time.png" />
+    
+    
+    <figcaption>
+        <h4>Figure Caption</h4>
+        
+    </figcaption>
+    
+</figure>
+
 
 <h2 id="dp-algorithm">DP Algorithm</h2>
 
