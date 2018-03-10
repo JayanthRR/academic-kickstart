@@ -132,7 +132,21 @@
 
 &lt;p&gt;Intuitively, let us look at the following problem where we start from A and we need to reach the destination E, and the edge weights are the costs incurred for traversing that edge. The path that minimizes the cost is A-B-D-E. Equivalently, the decision (corresponds to choosing the next node) taken at each time step are B at k=0, D at k=1 and E at k=2. If the policy determined by the path A-B-D-E is optimal, then the truncated path B-D-E is also optimal. If it were not, then we can further reduce the cost by choosing the optimal path which contradicts the fact that A-B-D-E is the path with the minimum cost.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://jayanthrr.github.io/img/DP1.png&#34; alt=&#34;DP&#34; /&gt;&lt;/p&gt;
+&lt;!-- ![DP](/img/DP1.png) --&gt;
+
+
+&lt;figure&gt;
+    
+        &lt;img src=&#34;https://jayanthrr.github.io/img/DP1.png&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;DP Illustration&lt;/h4&gt;
+        
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
 
 &lt;h1 id=&#34;dp-algorithm&#34;&gt;DP Algorithm&lt;/h1&gt;
 
@@ -150,43 +164,39 @@ $\mu^{*}_{k}=u_{k}^{*}(x_{k})$ minimizes the above equation, then the policy $\p
 
 &lt;p&gt;Let us look at an example application of the above described DP algorithm. Consider a perfect binary tree of height N (i.e. each level k of the binary tree has $2^{k}$ nodes). The nodes are of two types, green and red. It is know before hand that each node can be red with probability $p$ and green with probability $1-p$. We shall call an arc as the line joining a node with one of it&amp;rsquo;s children. An arc is free if both the nodes are green, and is blocked if either of them is red. One can only traverse along free arcs, and the objective is to find if a free path (a sequence of free arcs) exists from the root to the leaves.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://jayanthrr.github.io/img/breakthrough.png&#34; alt=&#34;breakthrough&#34; /&gt;
+&lt;!-- ![breakthrough](/img/breakthrough.png) --&gt;
 
 
-&lt;div class=&#34;gallery&#34;&gt;
-  
-  
-  
-  
+&lt;figure&gt;
     
-      
+        &lt;img src=&#34;https://jayanthrr.github.io/img/breakthrough.png&#34; /&gt;
     
-  
-  &lt;a data-fancybox=&#34;gallery-2&#34; data-caption=&#34;Free path&#34; href=&#34;https://jayanthrr.github.io/img/breakthrough.png&#34;&gt;
-    &lt;img alt=&#34;&#34; src=&#34;https://jayanthrr.github.io/img/breakthrough.png&#34;&gt;
-  &lt;/a&gt;
-  
-&lt;/div&gt;&lt;/p&gt;
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;Free path&lt;/h4&gt;
+        
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
 
 &lt;p&gt;One way to find an exact solution to the above problem is to use DP to start from the leaves (level N), and traverse backwards to check if a free path exists. In the $k^{th}$ step of the DP, the algorithm finds if a path exists from each node (at height $N-k$) to the leaves using the results from step $k-1$. The amount of computation at the $k^{th}$ step is $\mathcal{O}(2^{N-k})$ and there are $N$ steps in the algorithm. The overall runtime is of the order $\mathcal{O}(N2^{N})$. We can see from the plot that the run time increases exponentially with the height of the tree.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://jayanthrr.github.io/img/runtime.png&#34; alt=&#34;runtime&#34; /&gt;
+&lt;!-- ![runtime](/img/runtime.png) --&gt;
 
 
-&lt;div class=&#34;gallery&#34;&gt;
-  
-  
-  
-  
+&lt;figure&gt;
     
-      
+        &lt;img src=&#34;https://jayanthrr.github.io/img/runtime.png&#34; /&gt;
     
-  
-  &lt;a data-fancybox=&#34;gallery-3&#34; data-caption=&#34;Run time for DP&#34; href=&#34;https://jayanthrr.github.io/img/runtime.png&#34;&gt;
-    &lt;img alt=&#34;&#34; src=&#34;https://jayanthrr.github.io/img/runtime.png&#34;&gt;
-  &lt;/a&gt;
-  
-&lt;/div&gt;&lt;/p&gt;
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;Run time plot&lt;/h4&gt;
+        
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
 
 &lt;p&gt;In problems where finding an exact solution is not critical and finding an approximately correct solution (that works most of the time) is sufficient, faster heuristics can be employed to achieve a tradeoff between accuracy and computation. Let us use one such heuristic here that reduces the computation time drastically while offering a suboptimal solution.&lt;/p&gt;
 
@@ -231,7 +241,7 @@ $$k = 0,1,..,N-1$$&lt;/p&gt;
 &lt;li&gt;If at a node, both the children are green, rollout algorithm looks one step ahead, i.e. runs greedy policy on the children of the current node. If exactly one of these return True, the algorithm traverses that corresponding arc. If both of these return True, then the algorithm chooses one according to a fixed rule (choose the right child), and if both of them return False, then the algorithm returns False.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;This seemingly very simple trick can lead to large performance gains while minimizing the computation required. If we look at the results below, we can observe that using rollout we can considerable improve on the accuracy of finding a free path, while keeping the amount of computation required close to that of the greedy policy.&lt;/p&gt;
+&lt;p&gt;This seemingly very simple trick can lead to large performance gains while minimizing the computation required. If we look at the results below, we can observe that using rollout we can considerable improve on the accuracy of finding a free path, while keeping the amount of computation required close to that of the greedy policy. The implementation can be found &lt;a href=&#34;https://github.com/JayanthRR/approximate-dynamic-programming&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
 
 &lt;figure&gt;
@@ -240,7 +250,7 @@ $$k = 0,1,..,N-1$$&lt;/p&gt;
     
     
     &lt;figcaption&gt;
-        &lt;h4&gt;Figure Caption&lt;/h4&gt;
+        &lt;h4&gt;Accuracy plot&lt;/h4&gt;
         
     &lt;/figcaption&gt;
     
@@ -254,7 +264,7 @@ $$k = 0,1,..,N-1$$&lt;/p&gt;
     
     
     &lt;figcaption&gt;
-        &lt;h4&gt;Figure Caption&lt;/h4&gt;
+        &lt;h4&gt;Runtime plot&lt;/h4&gt;
         
     &lt;/figcaption&gt;
     
@@ -268,7 +278,7 @@ $$k = 0,1,..,N-1$$&lt;/p&gt;
 &lt;h2 id=&#34;references&#34;&gt;References&lt;/h2&gt;
 
 &lt;ol&gt;
-&lt;li&gt;Bertsekas, D. P., Bertsekas, D. P., Bertsekas, D. P., &amp;amp; Bertsekas, D. P. (1995). Dynamic programming and optimal control (Vol. 1, No. 2). Belmont, MA: Athena scientific.&lt;/li&gt;
+&lt;li&gt;Bertsekas, D. P. (1995). Dynamic programming and optimal control (Vol. 1, No. 2). Belmont, MA: Athena scientific.&lt;/li&gt;
 &lt;/ol&gt;
 </description>
     </item>
