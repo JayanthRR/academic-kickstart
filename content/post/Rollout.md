@@ -21,17 +21,32 @@ preview = true
 [[gallery_item]]
 album = "1"
 image = "DP1.png"
-caption = "Write your image caption here"
+caption = ""
 
 [[gallery_item]]
 album = "2"
+image = "breakthrough.png"
+caption = "Free path"
+
+[[gallery_item]]
+album = "3"
+image = "runtime.png"
+caption = "Run time for DP"
+
+[[gallery_item]]
+album = "4"
 image = "time.png"
-caption = "Write your image caption here"
+caption = "Time"
+
+[[gallery_item]]
+album = "5"
+image = "accurcy.png"
+caption = "Accuracy"
 
 +++
 
 _Life can only be understood going backwards, but it must be lived going forwards - Kierkegaard_.
-{{< gallery album="2" >}}
+<!-- {{< gallery album="2" >}} -->
 Dynamic Programming is a mathematical technique that is used in several fields of research including economics, finance, engineering. It deals with making decisions over different stages of the problem in order to minimize (or maximize) a corresponding cost function (or reward). The outcome of a decision at a given stage can be fully predicted (deterministic) or can only be partially predicted (with randomness involved). One key aspect of such problems is the trade off in optimizing the cost incurred at the current stage and the cost to be incurred at a future stage.
 
 Dynamic Programming is very helpful in many contexts by providing an exact solution, however, when the problem size increases, it requires enormous amount of storage and computational time (often referred to as the _curse of dimensionality_) which makes it infeasible to apply to practical situations. Often in such situations, one may not desire an exact solution, but an approximately optimal (or suboptimal) solution. Then there must be a better class of techniques that can capture this trade off between feasibility and sub optimality. These techniques are collectively referred to as _Approximate Dynamic Programming_ or _Reinforcement Learning_ (in the field of AI) or _Neuro Dynamic Programming_ (in the field of automatic control), all of which essentially mean the same.
@@ -72,11 +87,7 @@ Then the truncated policy $\{\mu\_{i}^{\*},\mu\_{i+1}^{\*},.. \mu\_{N-1}^{\*}\}$
 
 Intuitively, let us look at the following problem where we start from A and we need to reach the destination E, and the edge weights are the costs incurred for traversing that edge. The path that minimizes the cost is A-B-D-E. Equivalently, the decision (corresponds to choosing the next node) taken at each time step are B at k=0, D at k=1 and E at k=2. If the policy determined by the path A-B-D-E is optimal, then the truncated path B-D-E is also optimal. If it were not, then we can further reduce the cost by choosing the optimal path which contradicts the fact that A-B-D-E is the path with the minimum cost.
 
-![Draw](/img/draw.jpg)
-
-{{< figure src="/img/time_notitle.png" title="Figure Caption" >}}
-
-{{< figure src="/img/time.png" title="Figure Caption" >}}
+![DP](/img/DP1.jpg)
 
 ## DP Algorithm
 
@@ -93,12 +104,29 @@ $\mu^{\*}\_{k}=u\_{k}^{\*}(x\_{k})$ minimizes the above equation, then the polic
 Example
 ======
 
+Let us look at an example application of the above described DP algorithm. Consider a perfect binary tree of height N (i.e. each level k of the binary tree has $2^{k}$ nodes). The nodes are of two types, green and red. It is know before hand that each node can be red with probability $p$ and green with probability $1-p$. We shall call an arc as the line joining a node with one of it's children. An arc is free if both the nodes are green, and is blocked if either of them is red. One can only traverse along free arcs, and the objective is to find if a free path (a sequence of free arcs) exists from the root to the leaves.
+
+{{< gallery album="2" >}}
+
+One way to find an exact solution to the above problem is to use DP to start from the leaves (level N), and traverse backwards to check if a free path exists. In the $k^{th}$ step of the DP, the algorithm finds if a path exists from each node (at height $N-k$) to the leaves using the results from step $k-1$. The amount of computation at the $k^{th}$ step is $\mathcal{O}(2^{N-k})$ and there are $N$ steps in the algorithm. The overall runtime is of the order $\mathcal{O}(N2^{N})$. We can see from the plot that the run time increases exponentially with the height of the tree.
+
+{{< gallery album="3" >}}
+
+In problems where finding an exact solution is not critical and finding an approximately correct solution (that works most of the time) is sufficient, faster heuristics can be employed to achieve a tradeoff between accuracy and computation. Let us use one such heuristic here that reduces the computation time drastically while offering a suboptimal solution.
+
+Consider a greedy algorithm which starts at the root node. If both the arcs from the root node are blocked, then the algorithm returns False (no path exists). If one of the arcs is free, it traverses down that arc to the child node and repeats the same with this node. If both the arcs are free, then it uses a fixed rule to choose which arc to traverse (say it chooses always the right arc). The runtime of this algorithm is $\mathcal{O}(N)$ which is extremely fast as compared to $\mathcal{O}(N2^{N})$. However, this algorithm always doesn't output the correct solution. For example, in the above figure, this algorithm outputs False despite the existence of a free path (bold lines).  
+
+
 One-step lookahead, multi-step lookahead
 ======
 
 
 Rollout
 ======
+<!--
+{{< figure src="/img/time_notitle.png" title="Figure Caption" >}}
+
+{{< figure src="/img/time.png" title="Figure Caption" >}} -->
 
 
 Conclusion
