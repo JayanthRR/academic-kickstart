@@ -87,7 +87,8 @@ Then the truncated policy $\{\mu\_{i}^{\*},\mu\_{i+1}^{\*},.. \mu\_{N-1}^{\*}\}$
 
 Intuitively, let us look at the following problem where we start from A and we need to reach the destination E, and the edge weights are the costs incurred for traversing that edge. The path that minimizes the cost is A-B-D-E. Equivalently, the decision (corresponds to choosing the next node) taken at each time step are B at k=0, D at k=1 and E at k=2. If the policy determined by the path A-B-D-E is optimal, then the truncated path B-D-E is also optimal. If it were not, then we can further reduce the cost by choosing the optimal path which contradicts the fact that A-B-D-E is the path with the minimum cost.
 
-![DP](/img/DP1.png)
+<!-- ![DP](/img/DP1.png) -->
+{{< figure src="/img/DP1.png" title="DP Illustration" >}}
 
 DP Algorithm
 ======
@@ -109,13 +110,14 @@ Example
 
 Let us look at an example application of the above described DP algorithm. Consider a perfect binary tree of height N (i.e. each level k of the binary tree has $2^{k}$ nodes). The nodes are of two types, green and red. It is know before hand that each node can be red with probability $p$ and green with probability $1-p$. We shall call an arc as the line joining a node with one of it's children. An arc is free if both the nodes are green, and is blocked if either of them is red. One can only traverse along free arcs, and the objective is to find if a free path (a sequence of free arcs) exists from the root to the leaves.
 
-![breakthrough](/img/breakthrough.png)
-{{< gallery album="2" >}}
+<!-- ![breakthrough](/img/breakthrough.png) -->
+{{< figure src="/img/breakthrough.png" title="Free path" >}}
 
 One way to find an exact solution to the above problem is to use DP to start from the leaves (level N), and traverse backwards to check if a free path exists. In the $k^{th}$ step of the DP, the algorithm finds if a path exists from each node (at height $N-k$) to the leaves using the results from step $k-1$. The amount of computation at the $k^{th}$ step is $\mathcal{O}(2^{N-k})$ and there are $N$ steps in the algorithm. The overall runtime is of the order $\mathcal{O}(N2^{N})$. We can see from the plot that the run time increases exponentially with the height of the tree.
 
-![runtime](/img/runtime.png)
-{{< gallery album="3" >}}
+<!-- ![runtime](/img/runtime.png) -->
+{{< figure src="/img/runtime.png" title="Run time plot" >}}
+
 
 In problems where finding an exact solution is not critical and finding an approximately correct solution (that works most of the time) is sufficient, faster heuristics can be employed to achieve a tradeoff between accuracy and computation. Let us use one such heuristic here that reduces the computation time drastically while offering a suboptimal solution.
 
@@ -158,12 +160,12 @@ Let us now apply this rollout algorithm to the example we discussed above. The r
 - If at a node, at least one of the two children is red, it proceeds exactly like the greedy algorithm.
 - If at a node, both the children are green, rollout algorithm looks one step ahead, i.e. runs greedy policy on the children of the current node. If exactly one of these return True, the algorithm traverses that corresponding arc. If both of these return True, then the algorithm chooses one according to a fixed rule (choose the right child), and if both of them return False, then the algorithm returns False.
 
-This seemingly very simple trick can lead to large performance gains while minimizing the computation required. If we look at the results below, we can observe that using rollout we can considerable improve on the accuracy of finding a free path, while keeping the amount of computation required close to that of the greedy policy.
+This seemingly very simple trick can lead to large performance gains while minimizing the computation required. If we look at the results below, we can observe that using rollout we can considerable improve on the accuracy of finding a free path, while keeping the amount of computation required close to that of the greedy policy. The implementation can be found [here](https://github.com/JayanthRR/approximate-dynamic-programming).
 
 
-{{< figure src="/img/accuracy.png" title="Figure Caption" >}}
+{{< figure src="/img/accuracy.png" title="Accuracy plot" >}}
 
-{{< figure src="/img/time.png" title="Figure Caption" >}}
+{{< figure src="/img/time.png" title="Runtime plot" >}}
 
 
 Conclusion
@@ -174,4 +176,4 @@ In this post, we discussed the basic DP problem, formulation, algorithm and illu
 References
 ----------
 
-1. Bertsekas, D. P., Bertsekas, D. P., Bertsekas, D. P., & Bertsekas, D. P. (1995). Dynamic programming and optimal control (Vol. 1, No. 2). Belmont, MA: Athena scientific.
+1. Bertsekas, D. P. (1995). Dynamic programming and optimal control (Vol. 1, No. 2). Belmont, MA: Athena scientific.
