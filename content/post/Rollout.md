@@ -18,10 +18,20 @@ image = ""
 caption = ""
 preview = true
 
+[[gallery_item]]
+album = "1"
+image = "DP1.png"
+caption = "Write your image caption here"
+
+[[gallery_item]]
+album = "2"
+image = "time.png"
+caption = "Write your image caption here"
+
 +++
 
 _Life can only be understood going backwards, but it must be lived going forwards - Kierkegaard_.
-
+{{< gallery album="2" >}}
 Dynamic Programming is a mathematical technique that is used in several fields of research including economics, finance, engineering. It deals with making decisions over different stages of the problem in order to minimize (or maximize) a corresponding cost function (or reward). The outcome of a decision at a given stage can be fully predicted (deterministic) or can only be partially predicted (with randomness involved). One key aspect of such problems is the trade off in optimizing the cost incurred at the current stage and the cost to be incurred at a future stage.
 
 Dynamic Programming is very helpful in many contexts by providing an exact solution, however, when the problem size increases, it requires enormous amount of storage and computational time (often referred to as the _curse of dimensionality_) which makes it infeasible to apply to practical situations. Often in such situations, one may not desire an exact solution, but an approximately optimal (or suboptimal) solution. Then there must be a better class of techniques that can capture this trade off between feasibility and sub optimality. These techniques are collectively referred to as _Approximate Dynamic Programming_ or _Reinforcement Learning_ (in the field of AI) or _Neuro Dynamic Programming_ (in the field of automatic control), all of which essentially mean the same.
@@ -62,7 +72,11 @@ Then the truncated policy $\{\mu\_{i}^{\*},\mu\_{i+1}^{\*},.. \mu\_{N-1}^{\*}\}$
 
 Intuitively, let us look at the following problem where we start from A and we need to reach the destination E, and the edge weights are the costs incurred for traversing that edge. The path that minimizes the cost is A-B-D-E. Equivalently, the decision (corresponds to choosing the next node) taken at each time step are B at k=0, D at k=1 and E at k=2. If the policy determined by the path A-B-D-E is optimal, then the truncated path B-D-E is also optimal. If it were not, then we can further reduce the cost by choosing the optimal path which contradicts the fact that A-B-D-E is the path with the minimum cost.
 
-![DP](/img/DP1.png)
+![Draw](/img/draw.jpg)
+
+{{< figure src="/img/time_notitle.png" title="Figure Caption" >}}
+
+{{< figure src="/img/time.png" title="Figure Caption" >}}
 
 ## DP Algorithm
 
@@ -78,7 +92,6 @@ $\mu^{\*}\_{k}=u\_{k}^{\*}(x\_{k})$ minimizes the above equation, then the polic
 
 Example
 ======
-
 
 One-step lookahead, multi-step lookahead
 ======

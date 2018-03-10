@@ -1,14 +1,14 @@
 +++
-title = "Course Recommender Engine"
-date = 2018-03-08T22:46:44-05:00
+title = "Stochastic Shortest Path"
+date = 2018-03-09T02:03:50-05:00
 draft = false
 
 # Tags: can be used for filtering projects.
 # Example: `tags = ["machine-learning", "deep-learning"]`
-tags = ["collaborative filtering", "Recommender systems"]
+tags = ["dynamic-programming", "approximate-dynamic-programming", "policy-iteration"]
 
 # Project summary to display on homepage.
-summary = "Developed during Hack OH/IO 2016"
+summary = ""
 
 # Optional image to display on homepage.
 image_preview = ""
@@ -30,5 +30,6 @@ caption = ""
 
 +++
 
-Built a collaborative filtering based recommender system for selecting courses based on the user's past history using apache spark's MLlib. Developed and demostrated a working prototype in 24 hours during Hack OH/IO 2016. 
+I am currently working on a stochastic shortest path problem in an urban traffic scenario, considering the topological relations between the roads. 
+
 
