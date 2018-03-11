@@ -1,6 +1,6 @@
 +++
 title = "Rollout: Approximate Dynamic Programming"
-date = 2018-02-27T14:29:56-05:00
+date = 2018-03-09T14:29:56-05:00
 draft = false
 
 # Tags and categories
