@@ -7,7 +7,7 @@ draft = false
 # For example, use `tags = []` for no tags, or the form `tags = ["A Tag", "Another Tag"]` for one or more tags.
 tags = []
 categories = []
-
+disable_comments = false
 # Featured image
 # Place your image in the `static/img/` folder and reference its filename below, e.g. `image = "example.jpg"`.
 # Use `caption` to display an image caption.
@@ -45,13 +45,13 @@ caption = "Accuracy"
 
 +++
 
-_Life can only be understood going backwards, but it must be lived going forwards - Kierkegaard_.
+_"Life can only be understood going backwards, but it must be lived going forwards" - Kierkegaard_.
 
 Dynamic Programming is a mathematical technique that is used in several fields of research including economics, finance, engineering. It deals with making decisions over different stages of the problem in order to minimize (or maximize) a corresponding cost function (or reward). The outcome of a decision at a given stage can be fully predicted (deterministic) or can only be partially predicted (with randomness involved). One key aspect of such problems is the trade off in optimizing the cost incurred at the current stage and the cost to be incurred at a future stage.
 
-Dynamic Programming is very helpful in many contexts by providing an exact solution, however, when the problem size increases, it requires enormous amount of storage and computational time (often referred to as the _curse of dimensionality_) which makes it infeasible to apply to practical situations. Often in such situations, one may not desire an exact solution, but an approximately optimal (or suboptimal) solution. Then there must be a better class of techniques that can capture this trade off between feasibility and sub optimality. These techniques are collectively referred to as _Approximate Dynamic Programming_ or _Reinforcement Learning_ (in the field of AI) or _Neuro Dynamic Programming_ (in the field of automatic control), all of which essentially mean the same.
+Dynamic Programming is very helpful in many contexts by providing an exact solution, however, when the problem size increases, it requires enormous amount of storage and computational time (often referred to as the _curse of dimensionality_) which makes it infeasible to apply to practical situations. Often in such situations, one may not desire an exact solution, but an approximately optimal (or suboptimal) solution. Then there must be a better class of techniques that can capture this trade off between feasibility and sub optimality. These techniques are collectively referred to as **_Approximate Dynamic Programming_** or **_Reinforcement Learning_** (in the field of AI) or **_Neuro Dynamic Programming_** (in the field of automatic control), all of which essentially mean the same. In this blog post, we shall look at a specific technique called **_Rollout Algorithm_** that is quite extensively used (with surprisingly good results). In fact, **[Mastering the game of Go, DeepMind](https://www.nature.com/articles/nature16961)** uses a variant of _Rollout_ called **_Monte Carlo Tree Search_(MCTS)**.
 
-In this blog post, we shall look at a specific technique called _Rollout Algorithm_ that is quite extensively used (with surprisingly good results). In fact, [Mastering the game of Go, DeepMind](https://www.nature.com/articles/nature16961) uses a variant of _Rollout_ called _Monte Carlo Tree Search_. We shall first formulate a DP problem, state the DP algorithm and illustrate with an example the infeasibility of DP. Using the same example, we shall study how _Rollout_ offers an effective solution that optimizes the trade-off between accuracy and computation. This post is entirely based on my reading of the book [Approximate Dynamic Programming](http://web.mit.edu/dimitrib/www/dpchapter.html).
+We shall first formulate a DP problem, state the DP algorithm and illustrate with an example the infeasibility of DP. Using the same example, we shall study how _Rollout_ offers an effective solution that optimizes the trade-off between accuracy and computation. This post is entirely based on my reading of the book [Approximate Dynamic Programming](http://web.mit.edu/dimitrib/www/dpchapter.html).
 
 DP formulation
 ======
@@ -149,6 +149,7 @@ where $\tilde{J}\_{k+2}$ is an approximation of the cost-to-go of $J\_{k+2}$. In
 
 Rollout
 ======
+
 The Rollout algorithm is similar to a _one step lookahead_ algorithm in the sense that we find the control that minimizes the expression
 $$\bar{\mu}\_{k}(x\_{k}) = \arg \min\_{u\_{k} \in U\_{k}(x\_{k})}\mathbb{E}\_{w\_{k}}\bigg[g\_{k}(x\_{k}, u\_{k}, w\_{k}) + \tilde{J}\_{k+1}(f\_{k}(x\_{k}, u\_{k}, w\_{k}))\bigg],$$
 $$k = 0,1,..,N-1$$
@@ -166,6 +167,8 @@ This seemingly very simple trick can lead to large performance gains while minim
 {{< figure src="/img/accuracy.png" title="Accuracy plot" >}}
 
 {{< figure src="/img/time.png" title="Runtime plot" >}}
+
+For those who love history, here is some trivia. The term _"rollout"_ was first coined by [Tesauro](http://papers.nips.cc/paper/1302-on-line-policy-improvement-using-monte-carlo-search.pdf) in the context of playing backgammon, which specifically referred to rolling the dice in the game of backgammon. In this paper, a given backgammon position is evaluated by rolling out many games from that position using a simulator and averaging out the results to provide a score for that position.
 
 
 Conclusion
